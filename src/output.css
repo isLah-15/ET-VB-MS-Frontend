@@ -747,6 +747,12 @@
   .mt-3 {
     margin-top: calc(var(--spacing) * 3);
   }
+  .footer-title {
+    margin-bottom: calc(0.25rem * 2);
+    text-transform: uppercase;
+    opacity: 60%;
+    font-weight: 600;
+  }
   .mb-4 {
     margin-bottom: calc(var(--spacing) * 4);
   }
@@ -780,6 +786,29 @@
     padding: 0.5rem;
     min-height: 4rem;
   }
+  .footer {
+    display: grid;
+    width: 100%;
+    grid-auto-flow: row;
+    place-items: start;
+    column-gap: calc(0.25rem * 4);
+    row-gap: calc(0.25rem * 10);
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    & > * {
+      display: grid;
+      place-items: start;
+      gap: calc(0.25rem * 2);
+    }
+    &.footer-center {
+      grid-auto-flow: column dense;
+      place-items: center;
+      text-align: center;
+      & > * {
+        place-items: center;
+      }
+    }
+  }
   .navbar-end {
     display: inline-flex;
     align-items: center;
@@ -799,6 +828,9 @@
   }
   .flex {
     display: flex;
+  }
+  .grid {
+    display: grid;
   }
   .btn-circle {
     border-radius: calc(infinity * 1px);
@@ -831,8 +863,14 @@
     background-repeat: no-repeat;
     background-position-x: -50%;
   }
+  .grid-flow-col {
+    grid-auto-flow: column;
+  }
   .justify-center {
     justify-content: center;
+  }
+  .gap-4 {
+    gap: calc(var(--spacing) * 4);
   }
   .overflow-hidden {
     overflow: hidden;
@@ -861,6 +899,9 @@
   .bg-base-100 {
     background-color: var(--color-base-100);
   }
+  .bg-neutral {
+    background-color: var(--color-neutral);
+  }
   .bg-neutral-100 {
     background-color: var(--color-neutral-100);
   }
@@ -879,8 +920,14 @@
     --tw-gradient-to: var(--color-yellow-400);
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
   }
+  .fill-current {
+    fill: currentcolor;
+  }
   .p-2 {
     padding: calc(var(--spacing) * 2);
+  }
+  .p-10 {
+    padding: calc(var(--spacing) * 10);
   }
   .badge-xs {
     --size: calc(var(--size-selector, 0.25rem) * 4);
@@ -918,6 +965,9 @@
   .font-extrabold {
     --tw-font-weight: var(--font-weight-extrabold);
     font-weight: var(--font-weight-extrabold);
+  }
+  .text-neutral-content {
+    color: var(--color-neutral-content);
   }
   .text-red-600 {
     color: var(--color-red-600);
@@ -971,6 +1021,14 @@
   .badge-primary {
     --badge-color: var(--color-primary);
     --badge-fg: var(--color-primary-content);
+  }
+  .sm\:footer-horizontal {
+    @media (width >= 40rem) {
+      grid-auto-flow: column;
+      &.footer-center {
+        grid-auto-flow: row dense;
+      }
+    }
   }
   .md\:text-2xl {
     @media (width >= 48rem) {
