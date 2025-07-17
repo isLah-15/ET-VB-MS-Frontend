@@ -28,7 +28,7 @@ export default function HeroSection() {
       origin: { y: 0.6 },
     });
 
-    navigate("/");
+    navigate("/eventspage");
   };
 
   return (

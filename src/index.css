@@ -2,4 +2,6 @@
 @plugin "daisyui" {
    themes: false;
  }
+@import 'keen-slider/keen-slider.min.css';
+
 

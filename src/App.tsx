@@ -38,6 +38,7 @@
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
+import EventsPage from "./Pages/EventsSectionPage";
 
 
 export default function App() {
@@ -45,7 +46,10 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* Add other routes here */}
+        <Route path="/eventspage" element={<EventsPage />} />
+        {/* <Route path="/about" element={<About />} />
+        <Route path="/logout" element={<Logout />} /> */}
+        
       </Routes>
     </Router>
   );

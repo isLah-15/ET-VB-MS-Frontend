@@ -3,7 +3,7 @@ import HeroSection from "../Components/Home/Hero";
 import MainLayout from "../Layout/MainLayout/MainLayout";
 
 
-export default function Home() {
+ const Home = () => {
   return (
     <div>
     <MainLayout>
@@ -11,8 +11,9 @@ export default function Home() {
     </MainLayout>
     <Footer />
    
-
     </div>
 
   );
 }
+
+export default Home;

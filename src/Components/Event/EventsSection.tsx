@@ -1,0 +1,105 @@
+import { useState } from "react";
+import { motion } from "framer-motion";
+import EventSidebar from "./EventSidebar";
+import EventCard from "./EventCard";
+
+type EventType = {
+  eventId: number;
+  eventName: string;
+  eventDate: string;
+  category: string;
+  description: string;
+  ticketPrice: number;
+  imageUrl: string;
+  tag: string;
+};
+
+const allEvents: EventType[] = [
+  {
+    eventId: 2,
+    eventName: "Freak Parade",
+    eventDate: "2025-08-05",
+    category: "Parade",
+    description: "The streets come alive with the weird and wonderful.",
+    ticketPrice: 750,
+    imageUrl: "src/Assets/Images/FreakParade.jpg",
+    tag: "🎪 Live Soon",
+  },
+  {
+    eventId: 3,
+    eventName: "Haunted Funhouse",
+    eventDate: "2025-08-10",
+    category: "Horror",
+    description: "Dare to laugh and scream inside our cursed carnival maze.",
+    ticketPrice: 950,
+    imageUrl: "src/Assets/Images/Haunted House.jpg",
+    tag: "👻 New",
+  },
+  {
+    eventId: 4,
+    eventName: "Circus Rave",
+    eventDate: "2025-08-15",
+    category: "Circus",
+    description: "DJ Clownz and laser lights under the big top.",
+    ticketPrice: 1200,
+    imageUrl: "src/Assets/Images/Circus Rave.jpg",
+    tag: "🎉 Party",
+  },
+];
+
+const categories = ["All", "Parade", "Horror", "Circus", ];
+
+export default function FeaturedEvents() {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen((prev) => !prev);
+  };
+
+  const filteredEvents =
+    selectedCategory === "All"
+      ? allEvents
+      : allEvents.filter((event) => event.category === selectedCategory);
+
+  return (
+    <section className="bg-gradient-to-r from-pink-50 to-yellow-50 py-10 px-6">
+      <h2 className="text-4xl font-bold text-center text-rose-700 font-circus mb-8">
+        🎟️ Featured Events
+      </h2>
+
+      {/* Toggle Button */}
+      <div className="mb-4 text-center">
+        <button
+          className="bg-red-500 text-white px-4 py-2 rounded"
+          onClick={toggleSidebar}
+        >
+          {isSidebarOpen ? "Close Categories" : "Open Categories"}
+        </button>
+      </div>
+
+      <div className="flex gap-6">
+        {/* Sidebar */}
+        <EventSidebar
+          isOpen={isSidebarOpen}
+          onClose={() => setIsSidebarOpen(false)}
+          categories={categories}
+          selected={selectedCategory}
+          onSelectCategory={setSelectedCategory}
+        />
+
+        {/* Event Cards */}
+        <motion.div
+          className="flex-1 flex gap-6 overflow-x-auto pb-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+        >
+          {filteredEvents.map((event) => (
+            <EventCard key={event.eventId} {...event} />
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
