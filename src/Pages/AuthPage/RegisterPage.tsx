@@ -136,9 +136,9 @@ function RegisterPage() {
         </form>
 
         <p className="mt-6 text-center text-sm">
-          Already have a ticket?{' '}
+          Already have an account?{' '}
           <a href="/login" className="text-red-700 font-bold hover:underline">
-            Enter Here
+            Login
           </a>
         </p>
       </div>

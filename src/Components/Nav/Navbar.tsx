@@ -1,6 +1,18 @@
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from "../../Features/Auth/UserSlice";
+import type { RootState } from "../../App/Store";
 export default function Navbar() {
+
+  const user = useSelector((state: RootState) => state.user.user);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        dispatch(logout());
+        navigate('/');
+    };
+
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">
@@ -21,13 +33,13 @@ export default function Navbar() {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
             <li>
-              <Link to="/">Homepage</Link>
+              <Link to="/home">Homepage</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link to="/dashboard">Dashboard</Link>
             </li>
             <li>
-              <Link to="/logout">Logout</Link>
+              <button className="btn btn-link" onClick={handleLogout}>Logout</button>
             </li>
           </ul>
         </div>

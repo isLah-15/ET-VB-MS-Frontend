@@ -2,21 +2,49 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
+import { ApiDomain } from "../../Utils/ApiDomain";
+
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // TODO: Replace with real authentication logic
-    if (email && password) {
-      console.log("Logging in with:", email, password);
-      navigate("/dashboard"); // Or redirect to wherever
-    } else {
-      alert("Please enter both email and password.");
+    if (!email || !password) {
+      setError("Please enter both email and password.");
+      return;
+    }
+
+    try {
+      const res = await fetch(`${ApiDomain}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // If you're using cookies
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data?.message || "Login failed. Please try again.");
+        return;
+      }
+
+      // Save token (if using localStorage-based auth)
+      if (data?.token) {
+        localStorage.setItem("token", data.token);
+      }
+
+      navigate("/home");
+    } catch (err) {
+      setError("An error occurred while trying to log in.");
+      console.error("Login error:", err);
     }
   };
 
@@ -61,6 +89,10 @@ const LoginPage = () => {
             />
           </div>
 
+          {error && (
+            <p className="text-red-600 text-sm text-center">{error}</p>
+          )}
+
           <button
             type="submit"
             className="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-full shadow-lg font-semibold flex items-center justify-center gap-2 transition duration-300"
@@ -85,4 +117,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-

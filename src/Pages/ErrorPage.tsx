@@ -1,8 +1,6 @@
-
-import { Link, useRouteError } from "react-router";
+import { Link } from "react-router-dom";
 
 const Error = () => {
-    const error = useRouteError();
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 px-4">
             <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full text-center">
@@ -11,7 +9,7 @@ const Error = () => {
                     Sorry, we could not find the page you are looking for.
                 </p>
                 <p className="text-gray-500 mb-6">
-                    {(error as Error)?.message || "An unexpected error occurred."}
+                    An unexpected error occurred.
                 </p>
                 <Link
                     to="/"

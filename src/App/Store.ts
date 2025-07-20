@@ -5,6 +5,12 @@ import storage from 'redux-persist/lib/storage'
 import { userAPI } from '../Features/Auth/UserAPI'
 import { loginAPI } from '../Features/Auth/LoginAPI'
 import UserSlice from '../Features/Auth/UserSlice'
+import { eventAPI } from '../Features/Events/EventAPI'
+import { bookingAPI } from '../Features/Booking/BookingAPI'
+import { paymentAPI } from '../Features/Payment/PaymentAPI'
+import { customerSupportAPI } from '../Features/Support/SupportAPI'
+import { venueAPI } from '../Features/Venue/VenueAPI'
+
 
 
 
@@ -20,6 +26,11 @@ const persistConfig = {
 const rootReducer = combineReducers({ //combining all reducers into one root reducer
     [userAPI.reducerPath]: userAPI.reducer,
     [loginAPI.reducerPath]: loginAPI.reducer,
+    [eventAPI.reducerPath]: eventAPI.reducer,
+    [bookingAPI.reducerPath]: bookingAPI.reducer,
+    [paymentAPI.reducerPath]: paymentAPI.reducer,
+    [customerSupportAPI.reducerPath]: customerSupportAPI.reducer,
+    [venueAPI.reducerPath]: venueAPI.reducer,
     user: UserSlice
 })
 
@@ -33,7 +44,12 @@ export const store = configureStore({
         serializableCheck: false // disable serializable check for the persisted state - A serializable value is a value that can be converted to JSON and back without losing information. Its desabled here because the RTK Query APIs use non-serializable values (like functions) in their state.
     })
         .concat(userAPI.middleware) // add the usersAPI middleware to the store - helps with caching, invalidation, polling, and other features
-        .concat(loginAPI.middleware) // add the loginAPI middleware
+        .concat(loginAPI.middleware)
+        .concat(eventAPI.middleware)
+        .concat(bookingAPI.middleware)
+        .concat(paymentAPI.middleware)
+        .concat(customerSupportAPI.middleware)
+        .concat(venueAPI.middleware)
         // .concat(carApi.middleware) // add the CarAPI middleware
 
 })

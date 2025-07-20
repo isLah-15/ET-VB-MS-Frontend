@@ -9,13 +9,13 @@ export default function CheckoutPage() {
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/event/${eventId}`)
+    fetch(`http://localhost:8081/event/${eventId}`)
       .then((res) => res.json())
       .then(setEvent);
   }, [eventId]);
 
   const handlePayment = async () => {
-    const response = await fetch("http://localhost:3000/booking", {
+    const response = await fetch("http://localhost:8081/booking", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

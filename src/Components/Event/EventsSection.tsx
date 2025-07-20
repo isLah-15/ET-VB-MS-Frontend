@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import EventSidebar from "./EventSidebar";
 import EventCard from "./EventCard";
 import { useNavigate } from "react-router-dom";
+import EventModal from "./EventModal";
 
 type EventType = {
   eventId: number;
@@ -18,7 +19,7 @@ type EventType = {
 
 const allEvents: EventType[] = [
   {
-    eventId: 2,
+    eventId: 69,
     eventName: "Freak Parade",
     eventDate: "2025-08-05",
     category: "Parade",
@@ -26,10 +27,10 @@ const allEvents: EventType[] = [
     ticketPrice: 750,
     imageUrl: "src/Assets/Images/FreakParade.jpg",
     tag: "🎪 Live Soon",
-    venueId: 1
+    venueId: 1,
   },
   {
-    eventId: 3,
+    eventId: 70,
     eventName: "Haunted Funhouse",
     eventDate: "2025-08-10",
     category: "Horror",
@@ -37,10 +38,10 @@ const allEvents: EventType[] = [
     ticketPrice: 950,
     imageUrl: "src/Assets/Images/Haunted House.jpg",
     tag: "👻 New",
-    venueId: 2
+    venueId: 2,
   },
   {
-    eventId: 4,
+    eventId: 71,
     eventName: "Circus Rave",
     eventDate: "2025-08-15",
     category: "Circus",
@@ -48,7 +49,7 @@ const allEvents: EventType[] = [
     ticketPrice: 1200,
     imageUrl: "src/Assets/Images/Circus Rave.jpg",
     tag: "🎉 Party",
-    venueId: 3
+    venueId: 3,
   },
 ];
 
@@ -57,6 +58,7 @@ const categories = ["All", "Parade", "Horror", "Circus"];
 export default function FeaturedEvents() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState<EventType | null>(null);
 
   const navigate = useNavigate();
 
@@ -64,9 +66,14 @@ export default function FeaturedEvents() {
     setIsSidebarOpen((prev) => !prev);
   };
 
-  const handleBook = (eventId: number) => {
-    console.log("Booking event with ID:", eventId);
-    navigate("/login"); 
+  const handleBook = (event: EventType) => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      setSelectedEvent(event); // Show modal
+    } else {
+      navigate("/login"); // Redirect to login
+    }
   };
 
   const filteredEvents =
@@ -111,11 +118,21 @@ export default function FeaturedEvents() {
             <EventCard
               key={event.eventId}
               {...event}
-              handleBook={() => handleBook(event.eventId)}
+              handleBook={() => handleBook(event)}
             />
           ))}
         </motion.div>
       </div>
+
+      {/* Event Modal */}
+      {selectedEvent && (
+  <EventModal
+    event={selectedEvent}
+    eventId={selectedEvent.eventId}
+    ticketPrice={selectedEvent.ticketPrice}
+    closeModal={() => setSelectedEvent(null)}
+  />
+)}
     </section>
   );
 }
