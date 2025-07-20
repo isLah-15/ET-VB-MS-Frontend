@@ -3,7 +3,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useLocation, useNavigate } from 'react-router';
 import { toast } from 'sonner';
-// import { userAPI } from '../../Features/Users/userAPI';
+import { userAPI } from '../../Features/Auth/UserAPI';
+
 
 
 type VerifyInputs = {
@@ -24,7 +25,7 @@ const VerifyUser = () => {
     const location = useLocation();
     const emailFromState = location.state?.email || '';
 
-    // const [verifyUser, { isLoading }] = userAPI.useVerifyUserMutation();
+    const [verifyUser, { isLoading }] = userAPI.useVerifyUserMutation();
     const {
         register,
         handleSubmit,
@@ -38,8 +39,8 @@ const VerifyUser = () => {
 
     const onSubmit: SubmitHandler<VerifyInputs> = async (data) => {
         try {
-            // const response = await verifyUser(data).unwrap();
-            // console.log("Verification response:", response);
+            const response = await verifyUser(data).unwrap();
+            console.log("Verification response:", response);
 
             toast.success("Account verified successfully!");
             // Redirect or show success
@@ -89,7 +90,7 @@ const VerifyUser = () => {
           )}
         </div>
 
-        {/* 
+        
         <button
           type="submit"
           disabled={isLoading}
@@ -104,7 +105,7 @@ const VerifyUser = () => {
             "🎟️ Verify"
           )}
         </button> 
-        */}
+       
       </form>
     </div>
   </div>

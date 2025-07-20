@@ -44,6 +44,10 @@ import LandingPage from "./Pages/LandingPage";
 import RegisterPage from "./Pages/AuthPage/RegisterPage";
 import LoginPage from "./Pages/AuthPage/LoginPage";
 import VerifyUser from "./Pages/AuthPage/VerifyPage";
+import Error from "./Pages/ErrorPage";
+import EventDetails from "./Pages/EventDetails";
+import CheckoutPage from "./Pages/CheckoutPage";
+import BookingConfirmation from "./Pages/BookingConfirmation";
 
 
 export default function App() {
@@ -57,8 +61,14 @@ export default function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/verify" element={<VerifyUser />} />
+        <Route path="/eventdetails" element={<EventDetails />} />
+        <Route path="/event/:eventId" element={<EventDetails />} />
+        <Route path="/checkout/:eventId" element={<CheckoutPage />} />
+        <Route path="/confirmation/:bookingId" element={<BookingConfirmation />} />
 
-        
+
+
+        <Route path= '*' element={<Error />} />
       </Routes>
     </Router>
   );

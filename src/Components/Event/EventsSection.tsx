@@ -13,6 +13,7 @@ type EventType = {
   ticketPrice: number;
   imageUrl: string;
   tag: string;
+  venueId: number;
 };
 
 const allEvents: EventType[] = [
@@ -25,6 +26,7 @@ const allEvents: EventType[] = [
     ticketPrice: 750,
     imageUrl: "src/Assets/Images/FreakParade.jpg",
     tag: "🎪 Live Soon",
+    venueId: 1
   },
   {
     eventId: 3,
@@ -35,6 +37,7 @@ const allEvents: EventType[] = [
     ticketPrice: 950,
     imageUrl: "src/Assets/Images/Haunted House.jpg",
     tag: "👻 New",
+    venueId: 2
   },
   {
     eventId: 4,
@@ -45,6 +48,7 @@ const allEvents: EventType[] = [
     ticketPrice: 1200,
     imageUrl: "src/Assets/Images/Circus Rave.jpg",
     tag: "🎉 Party",
+    venueId: 3
   },
 ];
 

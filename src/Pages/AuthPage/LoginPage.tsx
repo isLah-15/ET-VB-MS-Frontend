@@ -29,7 +29,7 @@ const LoginPage = () => {
         className="w-full max-w-md bg-white rounded-xl shadow-2xl border-2 border-red-300 p-8"
       >
         <h2 className="text-3xl font-bold text-center text-red-700 mb-6 drop-shadow">
-          🎟️ Welcome Back!
+          🎟️ Welcome Back! 🎟️
         </h2>
 
         <form onSubmit={handleLogin} className="space-y-5">

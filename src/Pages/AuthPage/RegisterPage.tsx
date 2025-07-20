@@ -1,9 +1,9 @@
-// src/pages/registerpage.tsx
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { userAPI } from '../../Features/Auth/UserAPI';
 
 
 type RegisterInputs = {
@@ -28,7 +28,7 @@ const schema = yup.object({
 
 function RegisterPage() {
   const navigate = useNavigate();
-//   const [createUser, { isLoading }] = userAPI.useCreateUsersMutation({ fixedCacheKey: 'createUser' });
+  const [createUser, { isLoading }] = userAPI.useCreateUsersMutation({ fixedCacheKey: 'createUser' });
 
   const {
     register,
@@ -38,7 +38,8 @@ function RegisterPage() {
 
   const onSubmit: SubmitHandler<RegisterInputs> = async (data) => {
     try {
-    //   const response = await createUser(data).unwrap();
+      const response = await createUser(data).unwrap();
+      console.log("response here...", response);
       toast.success('🎉 Registration successful! Check your email for verification.');
       setTimeout(() => {
         navigate('/verify', { state: { email: data.email } });
@@ -124,14 +125,14 @@ function RegisterPage() {
               <p className="text-red-600 text-sm">{errors.confirmPassword.message}</p>
             )}
           </div>
-{/* 
+
           <button
             type="submit"
             className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-full shadow-lg tracking-wider uppercase transition duration-300 ease-in-out"
             disabled={isLoading}
           >
             {isLoading ? 'Registering...' : 'Step Into The Circus 🎟️'}
-          </button> */}
+          </button>
         </form>
 
         <p className="mt-6 text-center text-sm">
