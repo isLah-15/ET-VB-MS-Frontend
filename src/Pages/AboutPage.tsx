@@ -1,5 +1,4 @@
 import AboutLanding from "../Components/About/About"
-import Testimonials from "../Components/About/Testimonials"
 import FooterLanding from "../Components/Footer/FooterLanding"
 import NavbarLanding from "../Components/Nav/NavbarLanding"
 
@@ -9,7 +8,7 @@ const AboutPage = () => {
     <div>
       <NavbarLanding />
       <AboutLanding />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <FooterLanding />
     </div>
   )

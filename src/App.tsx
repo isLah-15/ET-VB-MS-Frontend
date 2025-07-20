@@ -40,16 +40,24 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
 import EventsPage from "./Pages/EventsSectionPage";
 import AboutPage from "./Pages/AboutPage";
+import LandingPage from "./Pages/LandingPage";
+import RegisterPage from "./Pages/AuthPage/RegisterPage";
+import LoginPage from "./Pages/AuthPage/LoginPage";
+import VerifyUser from "./Pages/AuthPage/VerifyPage";
 
 
 export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/home" element={<Home />} />
         <Route path="/eventspage" element={<EventsPage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/verify" element={<VerifyUser />} />
+
         
       </Routes>
     </Router>

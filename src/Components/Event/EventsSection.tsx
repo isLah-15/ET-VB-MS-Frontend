@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import EventSidebar from "./EventSidebar";
 import EventCard from "./EventCard";
+import { useNavigate } from "react-router-dom";
 
 type EventType = {
   eventId: number;
@@ -47,14 +48,21 @@ const allEvents: EventType[] = [
   },
 ];
 
-const categories = ["All", "Parade", "Horror", "Circus", ];
+const categories = ["All", "Parade", "Horror", "Circus"];
 
 export default function FeaturedEvents() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+  const navigate = useNavigate();
+
   const toggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev);
+  };
+
+  const handleBook = (eventId: number) => {
+    console.log("Booking event with ID:", eventId);
+    navigate("/login"); 
   };
 
   const filteredEvents =
@@ -96,7 +104,11 @@ export default function FeaturedEvents() {
           transition={{ duration: 0.6 }}
         >
           {filteredEvents.map((event) => (
-            <EventCard key={event.eventId} {...event} />
+            <EventCard
+              key={event.eventId}
+              {...event}
+              handleBook={() => handleBook(event.eventId)}
+            />
           ))}
         </motion.div>
       </div>

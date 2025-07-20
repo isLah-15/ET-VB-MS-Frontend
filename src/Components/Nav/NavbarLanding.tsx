@@ -3,17 +3,17 @@ export default function NavbarLanding() {
   return (
     <div className="navbar bg-base-100 shadow-sm">
   <div className="flex-1">
-    <a className="btn btn-ghost text-xl">Our About</a>
+    <a className="btn btn-ghost text-xl"></a>
   </div>
   <div className="flex-none">
     <ul className="menu menu-horizontal px-1">
-      <li><a>Link</a></li>
+      
       <li>
         <details>
-          <summary>Parent</summary>
+          <summary>Sign Up</summary>
           <ul className="bg-base-100 rounded-t-none p-2">
-            <li><a>Link 1</a></li>
-            <li><a>Link 2</a></li>
+            <li><a>Register</a></li>
+            <li><a>Login</a></li>
           </ul>
         </details>
       </li>

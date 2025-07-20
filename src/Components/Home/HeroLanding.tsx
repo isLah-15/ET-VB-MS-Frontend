@@ -1,6 +1,9 @@
 
 import { Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+
+
 
 const HeroLanding = () => {
   return (
@@ -29,10 +32,12 @@ const HeroLanding = () => {
         transition={{ duration: 1, delay: 1 }}
         className="mt-10 flex justify-center"
       >
-        <button className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-lg rounded-full shadow-xl flex items-center gap-2">
-          <Sparkles className="w-5 h-5 animate-pulse" />
-          Browse Events
+        <Link to="/eventspage">
+            <button className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-lg rounded-full shadow-xl flex items-center gap-2">
+            <Sparkles className="w-5 h-5 animate-pulse" />
+            Browse Events
         </button>
+        </Link>
       </motion.div>
     </section>
   );
