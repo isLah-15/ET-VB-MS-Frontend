@@ -31,18 +31,25 @@ const EventModal: React.FC<EventModalProps> = ({ eventId, ticketPrice, closeModa
     const totalAmount = quantity * ticketPrice;
 
     try {
+      
       // 1. Create the booking
-      const booking = await createBooking({
+      const bookingRes = await createBooking({
         userId,
         eventId,
         quantity,
         totalAmount,
-        bookingStatus: "confirmed",
+        bookingStatus: "pending",
       }).unwrap();
+      console.log(bookingRes)
 
+       console.log(
+        bookingRes.newBooking.bookingId,
+        userId,
+        totalAmount
+        )
       // 2. Create payment for the booking
-      await createPayment({
-        bookingId: booking.bookingId,
+      const paymentRes = await createPayment({
+        bookingId: bookingRes.newBooking.bookingId,
         userId: userId,
         transactionId: Math.floor(100000 + Math.random() * 900000), // Mock
         amount: totalAmount,
@@ -53,7 +60,15 @@ const EventModal: React.FC<EventModalProps> = ({ eventId, ticketPrice, closeModa
       toast.success("Booking and payment successful!");
 
       // ✅ Redirect to summary or dashboard
-      navigate("/my-tickets");
+      // navigate("/my-tickets");
+      console.log(eventId,bookingRes,paymentRes)
+      navigate("/my-tickets", {
+          state: {
+             event: eventId,
+             booking: bookingRes,
+             payment: paymentRes,
+          },
+      });
 
     } catch (error: any) {
       toast.error(error?.data?.message || "Something went wrong. Try again.");
@@ -66,7 +81,7 @@ const EventModal: React.FC<EventModalProps> = ({ eventId, ticketPrice, closeModa
         <h2 className="text-xl font-bold mb-4">Confirm Your Booking</h2>
 
         <div className="space-y-3">
-          <p><span className="font-semibold">Ticket Price:</span> ${ticketPrice}</p>
+          <p><span className="font-semibold">Ticket Price:</span> Ksh {ticketPrice}</p>
 
           <label className="block">
             <span className="font-semibold">Quantity:</span>
@@ -79,7 +94,7 @@ const EventModal: React.FC<EventModalProps> = ({ eventId, ticketPrice, closeModa
             />
           </label>
 
-          <p><span className="font-semibold">Total:</span> ${ticketPrice * quantity}</p>
+          <p><span className="font-semibold">Total:</span> Ksh {ticketPrice * quantity}</p>
         </div>
 
         <div className="flex justify-between items-center mt-6 gap-3">

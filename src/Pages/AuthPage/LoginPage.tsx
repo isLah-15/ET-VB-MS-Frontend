@@ -3,10 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { ApiDomain } from "../../Utils/ApiDomain";
+import { loginSuccess } from "../../Features/Auth/UserSlice";
+import { useDispatch } from "react-redux";
 
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -37,9 +40,11 @@ const LoginPage = () => {
       }
 
       // Save token (if using localStorage-based auth)
-      if (data?.token) {
-        localStorage.setItem("token", data.token);
-      }
+
+      console.log(data)
+      
+        dispatch(loginSuccess(data));
+      
 
       navigate("/home");
     } catch (err) {

@@ -4,6 +4,8 @@ import EventSidebar from "./EventSidebar";
 import EventCard from "./EventCard";
 import { useNavigate } from "react-router-dom";
 import EventModal from "./EventModal";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../App/Store";
 
 type EventType = {
   eventId: number;
@@ -61,15 +63,16 @@ export default function FeaturedEvents() {
   const [selectedEvent, setSelectedEvent] = useState<EventType | null>(null);
 
   const navigate = useNavigate();
+  const user = useSelector((state: RootState) => state.user);
 
   const toggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev);
   };
 
   const handleBook = (event: EventType) => {
-    const token = localStorage.getItem("token");
+    console.log(user.token)
 
-    if (token) {
+    if (user.token) {
       setSelectedEvent(event); // Show modal
     } else {
       navigate("/login"); // Redirect to login

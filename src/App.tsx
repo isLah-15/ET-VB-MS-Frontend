@@ -13,6 +13,7 @@ import Error from "./Pages/ErrorPage";
 import EventDetails from "./Pages/EventDetails";
 import CheckoutPage from "./Pages/CheckoutPage";
 import BookingConfirmation from "./Pages/BookingConfirmation";
+import TicketSummary from "./Components/Event/TicketSummary";
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="/events/:eventId" element={<EventDetails />} />
         <Route path="/checkout/:eventId" element={<CheckoutPage />} />
         <Route path="/confirmation/:bookingId" element={<BookingConfirmation />} />
+        <Route path="/my-tickets" element={<TicketSummary />} />
         <Route path="*" element={<Error />} />
       </Routes>
 

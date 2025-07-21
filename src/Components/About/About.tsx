@@ -1,7 +1,4 @@
-
-
-
-
+import { Link } from "react-router-dom";
 
 
 export default function AboutLanding() {
@@ -52,9 +49,12 @@ export default function AboutLanding() {
       {/* CTA Section */}
       <section className="text-center">
         <h2 className="text-3xl font-bold mb-4">Ready to grab your front-row seat?</h2>
+        <Link to="/eventspage">
         <button className="text-white bg-red-600 hover:bg-red-700 text-lg px-6 py-3 rounded-full">
-          Explore Events
+        Explore Events
         </button>
+        </Link>
+
       </section>
     </div>
   );
