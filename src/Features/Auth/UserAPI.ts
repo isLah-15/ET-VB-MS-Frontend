@@ -51,23 +51,30 @@ export const userAPI = createApi({ // sets up API endpoints for user management 
         }),
         getUsers: builder.query<TUser[], void>({
             query: () => '/users',
-            transformResponse: (response: { data: TUser[] }) => response.data, // transform the response to return only the users array
+            transformResponse: (response: { users: TUser[] }) => response.users, // transform the response to return only the users array
             providesTags: ['Users']
         }),
         // update user
-        updateUser: builder.mutation<TUser, Partial<TUser> & { id: number  }>({
-            query: (customer) => ({
-                url: `/user/${customer.id}`,
+        updateUser: builder.mutation<TUser, Partial<TUser> & { userId: number  }>({
+            query: (user) => ({
+                url: `/user/${user.userId}`,
                 method: 'PUT',
-                body: customer,
+                body: user,
             }),
             invalidatesTags: ['Users']
         }),
         getUserById: builder.query<TUser, number>({
-            query: (id) => `/customer/${id}`,
-            transformResponse: (response: { data: TUser }) => response.data, 
+            query: (id) => `/user/${id}`,
+            transformResponse: (response: { user: TUser }) => response.user, 
         }),
 
     })
 })
 
+export const {
+  useCreateUsersMutation,
+  useVerifyUserMutation,
+  useGetUsersQuery,
+  useUpdateUserMutation,
+  useGetUserByIdQuery,
+} = userAPI;

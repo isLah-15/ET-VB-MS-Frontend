@@ -36,7 +36,7 @@ export default function Navbar() {
               <Link to="/home">Homepage</Link>
             </li>
             <li>
-              <Link to="/dashboard">Dashboard</Link>
+              <Link to="/admin/dashboard">Dashboard</Link>
             </li>
             <li>
               <button className="btn btn-link" onClick={handleLogout}>Logout</button>

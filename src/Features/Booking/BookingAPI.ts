@@ -4,6 +4,7 @@ import { ApiDomain } from "../../Utils/ApiDomain";
 
 // Booking type definition
 export type TBooking = {
+  newBooking: any;
   bookingId: number;
   userId: number;
   eventId: number;

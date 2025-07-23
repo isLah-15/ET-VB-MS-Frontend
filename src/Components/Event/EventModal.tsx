@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import type { RootState } from "../../App/Store";
 import { useCreateBookingMutation } from "../../Features/Booking/BookingAPI";
 import { useCreatePaymentMutation } from "../../Features/Payment/PaymentAPI";
-import type { EventType } from "./types";
+import type { EventType } from "../../Types/types";
 
 interface EventModalProps {
   eventId: number;

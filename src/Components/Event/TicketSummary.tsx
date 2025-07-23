@@ -2,7 +2,7 @@
 import React from "react";
 import Barcode from "react-barcode";
 import { useLocation } from "react-router-dom";
-import type { EventType } from "./types";
+import type { EventType } from "../../Types/EventTypes";
 import type { TBooking } from "../../Features/Booking/BookingAPI";
 import type { TPayment } from "../../Features/Payment/PaymentAPI";
 import { useGetEventByIdQuery } from "../../Features/Events/EventAPI";
@@ -42,18 +42,21 @@ const TicketSummary: React.FC = () => {
     <div className="relative min-h-screen bg-black text-white font-mono px-6 py-12">
       {/* Neon glowing header */}
       <h1 className="text-4xl font-extrabold text-center mb-12 text-neon-glow uppercase tracking-wide">
-        🎪 The Carnival Ticket 🎟️
+         The Carnival Ticket 
       </h1>
 
       {/* Collage Background */}
-      <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none z-0">
+      <div className="absolute top-0 left-0 w-full h-full opacity-60 pointer-events-none z-0">
         <div className="grid grid-cols-3 gap-2 p-4">
-          <img src="/your-img1.jpg" alt="Collage 1" className="w-full h-40 object-cover rotate-3 grayscale" />
-          <img src="/your-img2.jpg" alt="Collage 2" className="w-full h-40 object-cover -rotate-2 sepia" />
-          <img src="/your-img3.jpg" alt="Collage 3" className="w-full h-40 object-cover rotate-1 contrast-150" />
-          <img src="/your-img4.jpg" alt="Collage 4" className="w-full h-40 object-cover rotate-6 brightness-90" />
-          <img src="/your-img5.jpg" alt="Collage 5" className="w-full h-40 object-cover -rotate-3" />
-          <img src="/your-img6.jpg" alt="Collage 6" className="w-full h-40 object-cover rotate-2 opacity-80" />
+          <img src="src\Assets\Images\download (42).jpg" alt="Collage 1" className="w-full h-40 object-cover rotate-3 grayscale" />
+          <img src="src\Assets\Images\Circus at night.jpg" alt="Collage 2" className="w-full h-40 object-cover -rotate-2 sepia" />
+          <img src="src\Assets\Images\download (43).jpg" alt="Collage 3" className="w-full h-40 object-cover rotate-1 contrast-150" />
+          <img src="src\Assets\Images\download (44).jpg" alt="Collage 4" className="w-full h-40 object-cover rotate-6 brightness-90" />
+          <img src="src\Assets\Images\download (45).jpg" alt="Collage 5" className="w-full h-40 object-cover -rotate-3" />
+          <img src="src\Assets\Images\download (46).jpg" alt="Collage 6" className="w-full h-40 object-cover rotate-2 opacity-80" />
+          <img src="src\Assets\Images\download (47).jpg" alt="Collage 7" className="w-full h-40 object-cover rotate-2 opacity-80" />
+          <img src="src\Assets\Images\download (48).jpg" alt="Collage 8" className="w-full h-40 object-cover rotate-2 opacity-80" />
+          <img src="src\Assets\Images\download (45).jpg" alt="Collage 9" className="w-full h-40 object-cover rotate-2 opacity-80" />
         </div>
       </div>
 
