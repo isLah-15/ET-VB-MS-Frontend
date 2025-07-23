@@ -4,7 +4,7 @@ import { ApiDomain } from "../../Utils/ApiDomain";
 
 // Payment type from DB
 export type TPayment = {
-  newPayment: any;
+  newPayment?: any;
   paymentId: number;
   bookingId: number;
   userId: number;

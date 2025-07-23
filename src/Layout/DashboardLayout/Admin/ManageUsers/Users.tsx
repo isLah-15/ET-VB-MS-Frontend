@@ -20,60 +20,81 @@ const Users = () => {
     console.log(usersData)
 
     return (
-    <div>
+  <div className="text-rose-100 font-horror">
 
-        {/* Change Role Modal */}
-        <ChangeRole user={selectedUser} />
+    {/* Change Role Modal */}
+    <ChangeRole user={selectedUser} />
 
-        {/* Display Users */}
-        {isLoading && <p className="text-yellow-200 italic">Loading users...</p>}
-        {error && <p className="text-red-500 font-bold">Error fetching users</p>}
-        {usersData && usersData.length > 0 ? (
-            <div className="overflow-x-auto border-2 border-yellow-700 rounded-xl shadow-[0_0_25px_rgba(255,255,0,0.15)] bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700 p-4">
-                <table className="table table-xs text-yellow-100 w-full">
-                    <thead>
-                        <tr className="bg-yellow-800 text-black text-md lg:text-lg uppercase tracking-wider border-b-2 border-yellow-600">
-                            <th className="px-4 py-3">First Name</th>
-                            <th className="px-4 py-3">Last Name</th>
-                            <th className="px-4 py-3">Email</th>
-                            <th className="px-4 py-3">Role</th>
-                            <th className="px-4 py-3">Verified</th>
-                            <th className="px-4 py-3">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {usersData.map((user: TUser) => (
-                            <tr key={user.userId} className="hover:bg-yellow-900 border-b border-yellow-700 transition-all duration-150 ease-in-out">
-                                <td className="px-4 py-2 border-r border-yellow-700 lg:text-base">{user.firstName}</td>
-                                <td className="px-4 py-2 border-r border-yellow-700 lg:text-base">{user.lastName}</td>
-                                <td className="px-4 py-2 border-r border-yellow-700 lg:text-base">{user.email}</td>
-                                <td className="px-4 py-2 border-r border-yellow-700 lg:text-base">{user.role}</td>
-                                <td className="px-4 py-2 border-r border-yellow-700 lg:text-base">
-                                    <span className={`badge px-3 py-1 rounded-full text-xs font-bold ${user.isVerified ? "bg-green-700 text-white" : "bg-yellow-600 text-black"}`}>
-                                        {user.isVerified ? "Verified" : "Not Verified"}
-                                    </span>
-                                </td>
-                                <td className="px-4 py-2">
-                                    <button
-                                        className="btn btn-sm bg-yellow-700 hover:bg-yellow-600 text-black border border-yellow-500 font-bold uppercase tracking-wide"
-                                        onClick={() => {
-                                            setSelectedUser(user);
-                                            (document.getElementById('role_modal') as HTMLDialogElement)?.showModal();
-                                        }}
-                                    >
-                                        Change Role
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-        ) : (
-            <p className="text-yellow-300 italic">No users found.</p>
-        )}
-    </div>
+    {/* Loading & Error States */}
+    {isLoading && (
+      <p className="italic text-rose-300 animate-pulse font-horror tracking-widest">
+        🌀 Summoning users...
+      </p>
+    )}
+    {error && (
+      <p className="text-red-600 font-bold bg-red-900/40 p-3 rounded-lg shadow-md border border-red-800 font-horror">
+        ⚠️ Failed to fetch souls!
+      </p>
+    )}
+
+    {/* User Table */}
+    {usersData && usersData.length > 0 ? (
+      <div className="overflow-x-auto border-4 border-rose-700 rounded-2xl bg-gradient-to-br from-black via-zinc-900 to-red-950 p-4 shadow-[0_0_35px_rgba(255,0,0,0.2)]">
+
+        <table className="table-auto w-full text-sm lg:text-base text-rose-100 font-horror">
+          <thead>
+            <tr className="bg-gradient-to-r from-rose-800 via-red-700 to-rose-900 text-zinc-100 uppercase tracking-[0.15em] border-b-4 border-rose-600 shadow-md">
+              <th className="px-4 py-3">First Name</th>
+              <th className="px-4 py-3">Last Name</th>
+              <th className="px-4 py-3">Email</th>
+              <th className="px-4 py-3">Role</th>
+              <th className="px-4 py-3">Verified</th>
+              <th className="px-4 py-3">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {usersData.map((user: TUser) => (
+              <tr
+                key={user.userId}
+                className="hover:bg-rose-900/30 border-b border-rose-800 transition-all duration-150 ease-in-out"
+              >
+                <td className="px-4 py-2 border-r border-rose-700">{user.firstName}</td>
+                <td className="px-4 py-2 border-r border-rose-700">{user.lastName}</td>
+                <td className="px-4 py-2 border-r border-rose-700">{user.email}</td>
+                <td className="px-4 py-2 border-r border-rose-700">{user.role}</td>
+                <td className="px-4 py-2 border-r border-rose-700">
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-extrabold tracking-wider shadow-md 
+                      ${user.isVerified ? "bg-green-700 text-white" : "bg-yellow-600 text-black"}
+                    `}
+                  >
+                    {user.isVerified ? "✔ Verified" : "✖ Not Verified"}
+                  </span>
+                </td>
+                <td className="px-4 py-2">
+                  <button
+                    className="px-3 py-1 rounded bg-gradient-to-br from-yellow-600 via-amber-500 to-yellow-400 text-black font-horror font-bold uppercase tracking-wide border border-yellow-600 hover:shadow-lg hover:scale-105 transition-transform"
+                    onClick={() => {
+                      setSelectedUser(user);
+                      (document.getElementById('role_modal') as HTMLDialogElement)?.showModal();
+                    }}
+                  >
+                    Change Role
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    ) : (
+      <p className="italic text-rose-300 tracking-wide font-horror">💀 No users in the ring of fire...</p>
+    )}
+  </div>
 );
+
+
 
 };
 

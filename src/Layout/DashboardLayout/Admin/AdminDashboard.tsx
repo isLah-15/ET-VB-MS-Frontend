@@ -15,54 +15,53 @@ const AdminDashboard = () => {
     };
 
     return (
-    <div className="flex flex-col min-h-screen bg-zinc-900 font-mono text-yellow-100">
-        <Navbar />
+  <div className="flex flex-col min-h-screen bg-gradient-to-b from-black via-zinc-900 to-red-900 font-sans text-white">
+    <Navbar />
 
-        {/* Top bar */}
-        <div className="flex px-4 py-4 bg-gradient-to-r from-yellow-900 via-amber-800 to-zinc-900 items-center border-b border-yellow-700 shadow-md">
-            {/* Drawer toggle button: visible on small screens */}
-            <button
-                className="mr-4 text-yellow-100 text-2xl lg:hidden"
-                onClick={handleDrawerToggle}
-            >
-                {drawerOpen ? <IoCloseSharp /> : <FaBars />}
-            </button>
-            <span className="text-lg font-bold drop-shadow text-amber-300">
-                Welcome to your Admin dashboard
-            </span>
-        </div>
-
-        <div className="flex flex-1">
-            {/* Drawer */}
-            <aside
-                className={`
-                    fixed top-0 z-40 w-64 bg-zinc-800 text-yellow-100 shadow-2xl border-r border-yellow-700
-                    ${drawerOpen ? "" : "hidden"} 
-                    lg:static lg:block lg:w-64
-                `}
-                style={{ minHeight: "100vh" }}
-            >
-                <div className="h-full relative">
-                    {/* Close button for mobile */}
-                    <button
-                        className="absolute top-4 right-4 text-amber-300 text-2xl lg:hidden"
-                        onClick={handleDrawerToggle}
-                    >
-                        <IoCloseSharp />
-                    </button>
-                    <AdminDrawer />
-                </div>
-            </aside>
-
-            {/* Main content */}
-            <main className="flex-1 bg-zinc-900 min-h-screen p-4 border-l border-yellow-800 shadow-inner">
-                <Outlet />
-            </main>
-        </div>
-
-        <Footer />
+    {/* Top bar */}
+    <div className="flex px-4 py-4 bg-gradient-to-r from-red-700 via-orange-600 to-yellow-500 items-center border-b-4 border-yellow-400 shadow-md">
+      <button
+        className="mr-4 text-white text-3xl lg:hidden hover:text-yellow-300 transition-all duration-300"
+        onClick={handleDrawerToggle}
+      >
+        {drawerOpen ? <IoCloseSharp /> : <FaBars />}
+      </button>
+      <span className="text-xl font-extrabold tracking-widest text-white drop-shadow-sm">
+        🎪 Welcome to the Admin Circus
+      </span>
     </div>
+
+    <div className="flex flex-1">
+      {/* Drawer */}
+      <aside
+        className={`
+          fixed top-0 z-40 w-64 bg-gradient-to-b from-red-800 via-black to-orange-900 text-white border-r-4 border-yellow-500 shadow-lg
+          ${drawerOpen ? "" : "hidden"} 
+          lg:static lg:block lg:w-64
+        `}
+        style={{ minHeight: "100vh" }}
+      >
+        <div className="h-full relative">
+          <button
+            className="absolute top-4 right-4 text-white text-3xl lg:hidden hover:text-yellow-300 transition-all"
+            onClick={handleDrawerToggle}
+          >
+            <IoCloseSharp />
+          </button>
+          <AdminDrawer />
+        </div>
+      </aside>
+
+      {/* Main content */}
+      <main className="flex-1 bg-gradient-to-b from-black via-zinc-900 to-red-800 min-h-screen p-6 border-l-4 border-yellow-500 shadow-inner text-white">
+        <Outlet />
+      </main>
+    </div>
+
+    <Footer />
+  </div>
 );
+
 
 };
 

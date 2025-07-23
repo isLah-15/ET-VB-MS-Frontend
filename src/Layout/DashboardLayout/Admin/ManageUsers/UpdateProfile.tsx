@@ -80,69 +80,91 @@ const UpdateProfile = ({ user, refetch }: UpdateProfileProps) => {
     };
 
     return (
-    <dialog id="update_profile_modal" className="modal sm:modal-middle">
-        <div className="modal-box bg-gradient-to-br from-zinc-800 via-gray-700 to-gray-900 text-yellow-100 w-full max-w-xs sm:max-w-lg mx-auto rounded-xl border-2 border-yellow-700 shadow-[0_0_30px_rgba(255,255,0,0.2)]">
-            <h3 className="font-extrabold text-xl mb-4 tracking-wide text-orange-400 border-b border-yellow-600 pb-2">
-                Update Profile
-            </h3>
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-                <input
-                    type="text"
-                    {...register("firstName")}
-                    placeholder="First Name"
-                    className="input rounded w-full p-3 bg-yellow-100 text-gray-900 font-semibold border-2 border-yellow-600 focus:ring-yellow-500 placeholder:text-gray-600"
-                />
-                {errors.firstName && (
-                    <span className="text-sm text-red-500 italic">{errors.firstName.message}</span>
-                )}
+  <dialog id="update_profile_modal" className="modal sm:modal-middle">
+    <div className="modal-box bg-gradient-to-br from-zinc-800 via-gray-700 to-gray-900 text-yellow-100 w-full max-w-xs sm:max-w-lg mx-auto rounded-2xl border-2 border-yellow-700 shadow-[0_0_40px_rgba(255,255,0,0.2)] px-6 py-5">
+      <h3 className="text-2xl font-bold text-orange-400 border-b border-yellow-600 pb-3 mb-5 tracking-wide uppercase">
+        Update Profile
+      </h3>
 
-                <input
-                    type="text"
-                    {...register("lastName")}
-                    placeholder="Last Name"
-                    className="input rounded w-full p-3 bg-yellow-100 text-gray-900 font-semibold border-2 border-yellow-600 focus:ring-yellow-500 placeholder:text-gray-600"
-                />
-                {errors.lastName && (
-                    <span className="text-sm text-red-500 italic">{errors.lastName.message}</span>
-                )}
-
-                <input
-                    type="text"
-                    {...register("image_url")}
-                    placeholder="Image URL"
-                    className="input rounded w-full p-3 bg-yellow-100 text-gray-900 font-semibold border-2 border-yellow-600 focus:ring-yellow-500 placeholder:text-gray-600"
-                />
-                {errors.image_url && (
-                    <span className="text-sm text-red-500 italic">{errors.image_url.message}</span>
-                )}
-
-                <div className="modal-action flex flex-col sm:flex-row gap-2">
-                    <button
-                        type="submit"
-                        className="btn w-full sm:w-auto bg-yellow-700 hover:bg-yellow-600 text-black font-bold border border-yellow-500 shadow-md uppercase tracking-wider"
-                        disabled={isLoading}
-                    >
-                        {isLoading ? (
-                            <>
-                                <span className="loading loading-spinner text-yellow-300" /> Updating...
-                            </>
-                        ) : "Update"}
-                    </button>
-                    <button
-                        className="btn w-full sm:w-auto bg-gray-700 hover:bg-gray-600 text-white border border-gray-500 shadow-sm"
-                        type="button"
-                        onClick={() => {
-                            (document.getElementById('update_profile_modal') as HTMLDialogElement)?.close();
-                            reset();
-                        }}
-                    >
-                        Cancel
-                    </button>
-                </div>
-            </form>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        {/* First Name */}
+        <div>
+          <input
+            type="text"
+            {...register("firstName")}
+            placeholder="First Name"
+            className="w-full p-3 rounded-lg bg-yellow-100 text-gray-900 font-semibold border-2 border-yellow-600 placeholder:text-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+          />
+          {errors.firstName && (
+            <p className="text-sm text-red-500 italic mt-1">
+              {errors.firstName.message}
+            </p>
+          )}
         </div>
-    </dialog>
+
+        {/* Last Name */}
+        <div>
+          <input
+            type="text"
+            {...register("lastName")}
+            placeholder="Last Name"
+            className="w-full p-3 rounded-lg bg-yellow-100 text-gray-900 font-semibold border-2 border-yellow-600 placeholder:text-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+          />
+          {errors.lastName && (
+            <p className="text-sm text-red-500 italic mt-1">
+              {errors.lastName.message}
+            </p>
+          )}
+        </div>
+
+        {/* Image URL */}
+        <div>
+          <input
+            type="text"
+            {...register("image_url")}
+            placeholder="Image URL"
+            className="w-full p-3 rounded-lg bg-yellow-100 text-gray-900 font-semibold border-2 border-yellow-600 placeholder:text-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+          />
+          {errors.image_url && (
+            <p className="text-sm text-red-500 italic mt-1">
+              {errors.image_url.message}
+            </p>
+          )}
+        </div>
+
+        {/* Actions */}
+        <div className="modal-action flex flex-col sm:flex-row gap-3 mt-6">
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full sm:w-auto px-6 py-2 bg-yellow-600 hover:bg-yellow-500 text-gray-900 font-bold rounded-lg border border-yellow-500 shadow-lg transition duration-200"
+          >
+            {isLoading ? (
+              <>
+                <span className="loading loading-spinner text-yellow-300 mr-2" />
+                Updating...
+              </>
+            ) : (
+              "Update"
+            )}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              (document.getElementById("update_profile_modal") as HTMLDialogElement)?.close();
+              reset();
+            }}
+            className="w-full sm:w-auto px-6 py-2 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-lg border border-gray-500 shadow transition duration-200"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </dialog>
 );
+
 
 };
 
