@@ -26,84 +26,80 @@ const Profile = () => {
 
 
  return (
-    <div>
-        {isLoading ? (
-            <p className="text-yellow-300 font-mono text-center py-10">Loading...</p>
-        ) : error ? (
-            <p className="text-red-500 font-mono text-center py-10">Error loading profile</p>
-        ) : (
-            <div className="bg-zinc-800 p-6 rounded-lg shadow-lg border border-yellow-700 min-h-screen text-yellow-100 font-mono">
-                <h2 className="text-2xl font-extrabold mb-4 text-amber-300 text-center drop-shadow">
-                    User Information
-                </h2>
+  <div>
+    {isLoading ? (
+      <p className="text-neutral-400 text-center py-10 font-sans italic">Loading...</p>
+    ) : error ? (
+      <p className="text-red-500 text-center py-10 font-sans font-medium">Error loading profile</p>
+    ) : (
+      <div className="bg-neutral-900 p-6 rounded-md shadow-sm border border-neutral-800 min-h-screen text-white font-sans">
+        <h2 className="text-2xl font-semibold mb-4 text-center">User Information</h2>
 
-                <div className="flex flex-col items-center mb-6 gap-4 border border-yellow-800 p-6 rounded-lg bg-zinc-900 shadow-inner">
-                    <img
-                        src={
-                            data?.image_url ||
-                            "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
-                        }
-                        alt="User Avatar"
-                        className="w-28 h-28 rounded-full border-4 border-amber-700 shadow-md object-cover"
-                    />
-                    <div className="text-center">
-                        <h3 className="text-xl font-bold text-amber-300 mb-2">
-                            Name: {data?.firstName} {data?.lastName}
-                        </h3>
-                        <p className="text-sm text-yellow-200">User ID: {data?.userId}</p>
-                        <p className="text-sm text-yellow-200">Email: {data?.email}</p>
-                        <p className="text-sm text-yellow-200">Role: {data?.role}</p>
-                        <p className="text-sm text-yellow-200">
-                            Verified?{" "}
-                            <span className={data?.isVerified ? "text-green-400" : "text-red-400"}>
-                                {data?.isVerified ? "Yes" : "No"}
-                            </span>
-                        </p>
-                    </div>
-                </div>
+        <div className="flex flex-col items-center mb-6 gap-4 border border-neutral-800 p-6 rounded-md bg-neutral-950">
+          <img
+            src={
+              data?.image_url ||
+              "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
+            }
+            alt="User Avatar"
+            className="w-28 h-28 rounded-full border border-neutral-700 object-cover"
+          />
+          <div className="text-center space-y-1">
+            <h3 className="text-lg font-semibold">{data?.firstName} {data?.lastName}</h3>
+            <p className="text-sm text-neutral-400">User ID: {data?.userId}</p>
+            <p className="text-sm text-neutral-400">Email: {data?.email}</p>
+            <p className="text-sm text-neutral-400">Role: {data?.role}</p>
+            <p className="text-sm text-neutral-400">
+              Verified?{" "}
+              <span className={data?.isVerified ? "text-green-500" : "text-red-500"}>
+                {data?.isVerified ? "Yes" : "No"}
+              </span>
+            </p>
+          </div>
+        </div>
 
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button
-                        className="btn bg-amber-700 hover:bg-amber-600 text-white font-bold px-6 py-2 rounded shadow"
-                        onClick={() => {
-                            (
-                                document.getElementById(
-                                    "update_profile_modal"
-                                ) as HTMLDialogElement
-                            )?.showModal();
-                        }}
-                    >
-                        Update Profile
-                    </button>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <button
+            className="px-5 py-2 bg-neutral-200 hover:bg-white text-black rounded transition"
+            onClick={() => {
+              (
+                document.getElementById(
+                  "update_profile_modal"
+                ) as HTMLDialogElement
+              )?.showModal();
+            }}
+          >
+            Update Profile
+          </button>
 
-                    <button
-                        className="btn bg-red-700 hover:bg-red-600 text-white font-bold px-6 py-2 rounded shadow"
-                        onClick={() => {
-                            dispatch(logout());
-                            navigate("/");
-                        }}
-                    >
-                        Log Out
-                    </button>
-                </div>
-            </div>
-        )}
+          <button
+            className="px-5 py-2 bg-red-600 hover:bg-red-500 text-white rounded transition"
+            onClick={() => {
+              dispatch(logout());
+              navigate("/");
+            }}
+          >
+            Log Out
+          </button>
+        </div>
+      </div>
+    )}
 
-        {/* Modal */}
-        {data && (
-            <UpdateProfile
-                user={{
-                    userId: data.userId,
-                    firstName: data.firstName,
-                    lastName: data.lastName,
-                    image_url: data.image_url,
-                    // add other fields if needed
-                }}
-                refetch={refetch}
-            />
-        )}
-    </div>
+    {/* Modal */}
+    {data && (
+      <UpdateProfile
+        user={{
+          userId: data.userId,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          image_url: data.image_url,
+        }}
+        refetch={refetch}
+      />
+    )}
+  </div>
 );
+
 }
 
 export default Profile

@@ -20,6 +20,8 @@ import Users from "./Layout/DashboardLayout/Admin/ManageUsers/Users";
 import Profile from "./Layout/DashboardLayout/Admin/Profile";
 import { useSelector } from "react-redux";
 import type { RootState } from "./App/Store";
+import Events from "./Layout/DashboardLayout/Admin/Events/Event";
+import Payments from "./Layout/DashboardLayout/Admin/Payments/Payment";
 
 
 // Example: Replace this with your actual user authentication logic
@@ -51,7 +53,8 @@ export default function App() {
         <Route path="analytics" element={<h1>Analytics</h1>} />
         <Route path="users" element={<Users />} />
         <Route path="profile" element={<Profile />} />
-        {/* <Route path="cars" element={<Cars />} /> */}
+        <Route path="events" element={<Events />} />
+        <Route path="payments" element={<Payments />} />
       </Route>
         
         <Route path="*" element={<Error />} />

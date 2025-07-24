@@ -37,7 +37,7 @@ export default function EventSidebar({
           </button>
         </div>
 
-        <div className="px-4 py-4 space-y-4">
+        <div className="px-4 py-4 space-y-4 max-h-[calc(100vh-80px)] overflow-y-auto">
           {categories.map((category) => (
             <button
               key={category}

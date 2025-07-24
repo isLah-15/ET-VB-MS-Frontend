@@ -20,36 +20,36 @@ const Users = () => {
     console.log(usersData)
 
     return (
-  <div className="text-rose-100 font-horror">
+  <div className="text-white font-sans">
 
     {/* Change Role Modal */}
     <ChangeRole user={selectedUser} />
 
     {/* Loading & Error States */}
     {isLoading && (
-      <p className="italic text-rose-300 animate-pulse font-horror tracking-widest">
-        🌀 Summoning users...
+      <p className="italic text-neutral-400 animate-pulse tracking-wide">
+        Loading users...
       </p>
     )}
     {error && (
-      <p className="text-red-600 font-bold bg-red-900/40 p-3 rounded-lg shadow-md border border-red-800 font-horror">
-        ⚠️ Failed to fetch souls!
+      <p className="text-red-500 font-medium bg-neutral-800 p-3 rounded-md border border-red-700">
+        ⚠️ Failed to fetch users.
       </p>
     )}
 
     {/* User Table */}
     {usersData && usersData.length > 0 ? (
-      <div className="overflow-x-auto border-4 border-rose-700 rounded-2xl bg-gradient-to-br from-black via-zinc-900 to-red-950 p-4 shadow-[0_0_35px_rgba(255,0,0,0.2)]">
+      <div className="overflow-x-auto border border-neutral-700 rounded-xl bg-neutral-900 p-4 shadow-sm">
 
-        <table className="table-auto w-full text-sm lg:text-base text-rose-100 font-horror">
+        <table className="table-auto w-full text-sm lg:text-base text-white">
           <thead>
-            <tr className="bg-gradient-to-r from-rose-800 via-red-700 to-rose-900 text-zinc-100 uppercase tracking-[0.15em] border-b-4 border-rose-600 shadow-md">
-              <th className="px-4 py-3">First Name</th>
-              <th className="px-4 py-3">Last Name</th>
-              <th className="px-4 py-3">Email</th>
-              <th className="px-4 py-3">Role</th>
-              <th className="px-4 py-3">Verified</th>
-              <th className="px-4 py-3">Actions</th>
+            <tr className="bg-neutral-800 text-neutral-300 uppercase text-xs tracking-wider border-b border-neutral-700">
+              <th className="px-4 py-3 text-left">First Name</th>
+              <th className="px-4 py-3 text-left">Last Name</th>
+              <th className="px-4 py-3 text-left">Email</th>
+              <th className="px-4 py-3 text-left">Role</th>
+              <th className="px-4 py-3 text-left">Verified</th>
+              <th className="px-4 py-3 text-left">Actions</th>
             </tr>
           </thead>
 
@@ -57,16 +57,16 @@ const Users = () => {
             {usersData.map((user: TUser) => (
               <tr
                 key={user.userId}
-                className="hover:bg-rose-900/30 border-b border-rose-800 transition-all duration-150 ease-in-out"
+                className="hover:bg-neutral-800 border-b border-neutral-700 transition-colors"
               >
-                <td className="px-4 py-2 border-r border-rose-700">{user.firstName}</td>
-                <td className="px-4 py-2 border-r border-rose-700">{user.lastName}</td>
-                <td className="px-4 py-2 border-r border-rose-700">{user.email}</td>
-                <td className="px-4 py-2 border-r border-rose-700">{user.role}</td>
-                <td className="px-4 py-2 border-r border-rose-700">
+                <td className="px-4 py-2 border-r border-neutral-800">{user.firstName}</td>
+                <td className="px-4 py-2 border-r border-neutral-800">{user.lastName}</td>
+                <td className="px-4 py-2 border-r border-neutral-800">{user.email}</td>
+                <td className="px-4 py-2 border-r border-neutral-800">{user.role}</td>
+                <td className="px-4 py-2 border-r border-neutral-800">
                   <span
-                    className={`px-3 py-1 rounded-full text-xs font-extrabold tracking-wider shadow-md 
-                      ${user.isVerified ? "bg-green-700 text-white" : "bg-yellow-600 text-black"}
+                    className={`px-3 py-1 rounded-full text-xs font-medium tracking-wide 
+                      ${user.isVerified ? "bg-green-600 text-white" : "bg-yellow-500 text-black"}
                     `}
                   >
                     {user.isVerified ? "✔ Verified" : "✖ Not Verified"}
@@ -74,7 +74,7 @@ const Users = () => {
                 </td>
                 <td className="px-4 py-2">
                   <button
-                    className="px-3 py-1 rounded bg-gradient-to-br from-yellow-600 via-amber-500 to-yellow-400 text-black font-horror font-bold uppercase tracking-wide border border-yellow-600 hover:shadow-lg hover:scale-105 transition-transform"
+                    className="px-3 py-1 rounded bg-neutral-200 text-black font-medium text-sm tracking-wide border border-neutral-400 hover:bg-white hover:scale-105 transition-transform"
                     onClick={() => {
                       setSelectedUser(user);
                       (document.getElementById('role_modal') as HTMLDialogElement)?.showModal();
@@ -89,10 +89,11 @@ const Users = () => {
         </table>
       </div>
     ) : (
-      <p className="italic text-rose-300 tracking-wide font-horror">💀 No users in the ring of fire...</p>
+      <p className="italic text-neutral-400 tracking-wide">No users found.</p>
     )}
   </div>
 );
+
 
 
 

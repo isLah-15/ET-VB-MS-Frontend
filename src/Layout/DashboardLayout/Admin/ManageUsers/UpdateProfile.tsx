@@ -81,8 +81,8 @@ const UpdateProfile = ({ user, refetch }: UpdateProfileProps) => {
 
     return (
   <dialog id="update_profile_modal" className="modal sm:modal-middle">
-    <div className="modal-box bg-gradient-to-br from-zinc-800 via-gray-700 to-gray-900 text-yellow-100 w-full max-w-xs sm:max-w-lg mx-auto rounded-2xl border-2 border-yellow-700 shadow-[0_0_40px_rgba(255,255,0,0.2)] px-6 py-5">
-      <h3 className="text-2xl font-bold text-orange-400 border-b border-yellow-600 pb-3 mb-5 tracking-wide uppercase">
+    <div className="modal-box bg-neutral-900 text-white w-full max-w-xs sm:max-w-lg mx-auto rounded-lg border border-neutral-700 shadow-sm px-6 py-5">
+      <h3 className="text-xl font-semibold border-b border-neutral-700 pb-3 mb-5 tracking-wide">
         Update Profile
       </h3>
 
@@ -93,7 +93,7 @@ const UpdateProfile = ({ user, refetch }: UpdateProfileProps) => {
             type="text"
             {...register("firstName")}
             placeholder="First Name"
-            className="w-full p-3 rounded-lg bg-yellow-100 text-gray-900 font-semibold border-2 border-yellow-600 placeholder:text-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            className="w-full p-3 rounded-md bg-neutral-800 text-white border border-neutral-700 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-500"
           />
           {errors.firstName && (
             <p className="text-sm text-red-500 italic mt-1">
@@ -108,7 +108,7 @@ const UpdateProfile = ({ user, refetch }: UpdateProfileProps) => {
             type="text"
             {...register("lastName")}
             placeholder="Last Name"
-            className="w-full p-3 rounded-lg bg-yellow-100 text-gray-900 font-semibold border-2 border-yellow-600 placeholder:text-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            className="w-full p-3 rounded-md bg-neutral-800 text-white border border-neutral-700 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-500"
           />
           {errors.lastName && (
             <p className="text-sm text-red-500 italic mt-1">
@@ -123,7 +123,7 @@ const UpdateProfile = ({ user, refetch }: UpdateProfileProps) => {
             type="text"
             {...register("image_url")}
             placeholder="Image URL"
-            className="w-full p-3 rounded-lg bg-yellow-100 text-gray-900 font-semibold border-2 border-yellow-600 placeholder:text-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            className="w-full p-3 rounded-md bg-neutral-800 text-white border border-neutral-700 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-500"
           />
           {errors.image_url && (
             <p className="text-sm text-red-500 italic mt-1">
@@ -137,11 +137,11 @@ const UpdateProfile = ({ user, refetch }: UpdateProfileProps) => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full sm:w-auto px-6 py-2 bg-yellow-600 hover:bg-yellow-500 text-gray-900 font-bold rounded-lg border border-yellow-500 shadow-lg transition duration-200"
+            className="w-full sm:w-auto px-6 py-2 bg-neutral-200 hover:bg-white text-black font-medium rounded-md border border-neutral-400 transition"
           >
             {isLoading ? (
               <>
-                <span className="loading loading-spinner text-yellow-300 mr-2" />
+                <span className="loading loading-spinner text-black mr-2" />
                 Updating...
               </>
             ) : (
@@ -155,7 +155,7 @@ const UpdateProfile = ({ user, refetch }: UpdateProfileProps) => {
               (document.getElementById("update_profile_modal") as HTMLDialogElement)?.close();
               reset();
             }}
-            className="w-full sm:w-auto px-6 py-2 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-lg border border-gray-500 shadow transition duration-200"
+            className="w-full sm:w-auto px-6 py-2 bg-neutral-700 hover:bg-neutral-600 text-white font-medium rounded-md border border-neutral-600 transition"
           >
             Cancel
           </button>
@@ -164,6 +164,7 @@ const UpdateProfile = ({ user, refetch }: UpdateProfileProps) => {
     </div>
   </dialog>
 );
+
 
 
 };

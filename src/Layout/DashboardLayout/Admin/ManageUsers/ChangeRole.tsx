@@ -68,46 +68,50 @@ const ChangeRole = ({ user }: ChangeRoleProps) => {
 
     return (
   <dialog id="role_modal" className="modal sm:modal-middle">
-    <div className="modal-box bg-gradient-to-br from-zinc-900 via-gray-900 to-red-950 text-rose-100 w-full max-w-xs sm:max-w-lg mx-auto rounded-xl border-2 border-rose-700 shadow-[0_0_30px_rgba(255,0,87,0.3)] font-horror">
-      <h3 className="font-extrabold text-xl mb-4 tracking-wide text-rose-400 border-b border-rose-600 pb-2 uppercase">
-        Change Role for {user?.firstName} {user?.lastName}
+    <div className="modal-box bg-zinc-950 text-rose-100 w-full max-w-sm sm:max-w-lg mx-auto rounded-2xl border border-rose-700 shadow-[0_0_20px_rgba(255,0,87,0.15)] font-horror p-6">
+      <h3 className="text-2xl font-bold text-rose-400 mb-4 border-b border-rose-700 pb-2 uppercase tracking-widest">
+        Change Role
       </h3>
+      <p className="text-sm mb-6 text-rose-200">
+        Updating role for <span className="font-semibold">{user?.firstName} {user?.lastName}</span>
+      </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-        <label className="text-rose-300 font-semibold uppercase tracking-wider">Select Role:</label>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <div>
+          <label className="text-sm text-rose-300 tracking-wide uppercase mb-1 block">Select Role</label>
+          <select
+            {...register("role")}
+            className="w-full bg-zinc-900 border border-rose-700 rounded-md px-3 py-2 text-rose-100 focus:outline-none focus:ring-1 focus:ring-rose-500"
+          >
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+          {errors.role && (
+            <span className="text-xs text-red-400 italic mt-1 block">{errors.role.message}</span>
+          )}
+        </div>
 
-        <select
-          {...register("role")}
-          className="select select-bordered w-full bg-rose-50 text-gray-900 font-bold border-rose-600 focus:ring-rose-500 focus:border-rose-500"
-        >
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
-        </select>
-
-        {errors.role && (
-          <span className="text-sm text-red-400 italic">{errors.role.message}</span>
-        )}
-
-        <div className="modal-action flex flex-col sm:flex-row gap-2">
+        <div className="flex flex-col sm:flex-row gap-2 pt-4">
           <button
             type="submit"
-            className="btn w-full sm:w-auto bg-rose-700 hover:bg-rose-600 text-white font-bold border border-rose-500 shadow-md uppercase tracking-wider"
+            className="bg-rose-700 hover:bg-rose-600 text-white font-semibold px-4 py-2 rounded-md shadow-sm tracking-wider uppercase transition duration-150 disabled:opacity-50"
             disabled={isLoading}
           >
             {isLoading ? (
-              <>
-                <span className="loading loading-spinner text-rose-300" /> Updating...
-              </>
+              <span className="flex items-center gap-2">
+                <span className="loading loading-spinner text-rose-200" />
+                Updating...
+              </span>
             ) : "Update Role"}
           </button>
 
           <button
-            className="btn w-full sm:w-auto bg-zinc-800 hover:bg-zinc-700 text-white border border-zinc-600 shadow-sm"
             type="button"
             onClick={() => {
               (document.getElementById('role_modal') as HTMLDialogElement)?.close();
               reset();
             }}
+            className="bg-transparent border border-rose-600 hover:bg-zinc-800 text-white font-medium px-4 py-2 rounded-md transition duration-150"
           >
             Cancel
           </button>
@@ -116,6 +120,7 @@ const ChangeRole = ({ user }: ChangeRoleProps) => {
     </div>
   </dialog>
 );
+
 
 };
 

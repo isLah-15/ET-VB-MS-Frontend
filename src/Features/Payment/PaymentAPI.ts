@@ -47,7 +47,7 @@ export const paymentAPI = createApi({
 
     // Get all payments
     getPayments: builder.query<TPayment[], void>({
-      query: () => "/payment",
+      query: () => "/payments",
       providesTags: ["Payment"],
     }),
 
@@ -58,7 +58,7 @@ export const paymentAPI = createApi({
     }),
 
     // Update payment
-    updatePayment: builder.mutation<TPayment, Partial<TPayment> & { paymentId: number }>({
+    updatePaymentById: builder.mutation<TPayment, Partial<TPayment> & { paymentId: number }>({
       query: ({ paymentId, ...updates }) => ({
         url: `/payment/${paymentId}`,
         method: "PUT",
@@ -68,7 +68,7 @@ export const paymentAPI = createApi({
     }),
 
     // Delete payment
-    deletePayment: builder.mutation<{ message: string }, number>({
+    deletePaymentById: builder.mutation<{ message: string }, number>({
       query: (paymentId) => ({
         url: `/payment/${paymentId}`,
         method: "DELETE",
@@ -83,6 +83,6 @@ export const {
   useCreatePaymentMutation,
   useGetPaymentsQuery,
   useGetPaymentByIdQuery,
-  useUpdatePaymentMutation,
-  useDeletePaymentMutation,
+  useUpdatePaymentByIdMutation,
+  useDeletePaymentByIdMutation,
 } = paymentAPI;

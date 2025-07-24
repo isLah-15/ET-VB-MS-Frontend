@@ -15,19 +15,19 @@ const AdminDashboard = () => {
     };
 
     return (
-  <div className="flex flex-col min-h-screen bg-gradient-to-b from-black via-zinc-900 to-red-900 font-sans text-white">
+  <div className="flex flex-col min-h-screen bg-neutral-950 font-sans text-white">
     <Navbar />
 
     {/* Top bar */}
-    <div className="flex px-4 py-4 bg-gradient-to-r from-red-700 via-orange-600 to-yellow-500 items-center border-b-4 border-yellow-400 shadow-md">
+    <div className="flex px-4 py-4 bg-neutral-900 items-center border-b border-neutral-700 shadow-sm">
       <button
-        className="mr-4 text-white text-3xl lg:hidden hover:text-yellow-300 transition-all duration-300"
+        className="mr-4 text-white text-2xl lg:hidden hover:text-neutral-300 transition"
         onClick={handleDrawerToggle}
       >
         {drawerOpen ? <IoCloseSharp /> : <FaBars />}
       </button>
-      <span className="text-xl font-extrabold tracking-widest text-white drop-shadow-sm">
-        🎪 Welcome to the Admin Circus
+      <span className="text-xl font-bold tracking-wide text-white">
+         Admin Dashboard
       </span>
     </div>
 
@@ -35,7 +35,7 @@ const AdminDashboard = () => {
       {/* Drawer */}
       <aside
         className={`
-          fixed top-0 z-40 w-64 bg-gradient-to-b from-red-800 via-black to-orange-900 text-white border-r-4 border-yellow-500 shadow-lg
+          fixed top-0 z-40 w-64 bg-neutral-900 text-white border-r border-neutral-800 shadow-sm
           ${drawerOpen ? "" : "hidden"} 
           lg:static lg:block lg:w-64
         `}
@@ -43,7 +43,7 @@ const AdminDashboard = () => {
       >
         <div className="h-full relative">
           <button
-            className="absolute top-4 right-4 text-white text-3xl lg:hidden hover:text-yellow-300 transition-all"
+            className="absolute top-4 right-4 text-white text-2xl lg:hidden hover:text-neutral-400 transition"
             onClick={handleDrawerToggle}
           >
             <IoCloseSharp />
@@ -53,7 +53,7 @@ const AdminDashboard = () => {
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 bg-gradient-to-b from-black via-zinc-900 to-red-800 min-h-screen p-6 border-l-4 border-yellow-500 shadow-inner text-white">
+      <main className="flex-1 bg-neutral-950 min-h-screen p-6 border-l border-neutral-800 shadow-inner text-white">
         <Outlet />
       </main>
     </div>
@@ -61,7 +61,6 @@ const AdminDashboard = () => {
     <Footer />
   </div>
 );
-
 
 };
 

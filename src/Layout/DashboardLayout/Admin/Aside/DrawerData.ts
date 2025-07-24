@@ -2,6 +2,7 @@ import { TbBrandGoogleAnalytics } from "react-icons/tb";
 import { FiUsers } from "react-icons/fi";
 import { FaUserCheck } from "react-icons/fa6";
 import { SlCalender } from "react-icons/sl";
+import { FaCashRegister } from "react-icons/fa";
 
 export type DrawerData = {
     id: string;
@@ -37,5 +38,12 @@ export const adminDrawerData: DrawerData[] = [
         icon: SlCalender,
         link: "events"
     },
+    {
+        id: "payments",
+        name: "Payments",
+        icon: FaCashRegister,
+        link: "payments"
+    }
+
 
 ]
