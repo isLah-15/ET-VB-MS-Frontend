@@ -3,7 +3,6 @@ import { toast } from "sonner";
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 
-
 import CreatePayment from "./CreatePayment";
 import UpdatePayment from "./UpdatePayment";
 import DeletePayment from "./DeletePayment";
@@ -39,7 +38,7 @@ const Payments = () => {
         updatedPayment,
       }).unwrap();
 
-      toast.success(`✅ Updated payment of Ksh${response.amount}`);
+      toast.success(`✅ Updated payment of $${response.amount}`);
       (document.getElementById("update_payment_modal") as HTMLDialogElement)?.close();
       setSelectedPayment(null);
       refetch();
@@ -53,7 +52,7 @@ const Payments = () => {
     if (!paymentToDelete) return;
     try {
       await deletePaymentById(paymentToDelete.paymentId).unwrap();
-      toast.success(`🗑 Deleted payment of Kshs${paymentToDelete.amount}`);
+      toast.success(`🗑 Deleted payment of $${paymentToDelete.amount}`);
       (document.getElementById("delete_payment_modal") as HTMLDialogElement)?.close();
       setPaymentToDelete(null);
       refetch();
@@ -93,65 +92,67 @@ const Payments = () => {
       )}
 
       {paymentsData?.payments?.length > 0 ? (
-        <div className="overflow-x-auto border border-neutral-700 rounded-xl bg-neutral-900 p-4 shadow-sm">
-          <table className="table-auto w-full text-sm lg:text-base text-white">
-            <thead>
-              <tr className="bg-neutral-800 text-neutral-300 uppercase text-xs tracking-wider border-b border-neutral-700">
-                <th className="px-4 py-3 text-left">Amount</th>
-                <th className="px-4 py-3 text-left">Method</th>
-                <th className="px-4 py-3 text-left">Status</th>
-                <th className="px-4 py-3 text-left">User</th>
-                <th className="px-4 py-3 text-left">Booking</th>
-                <th className="px-4 py-3 text-left">Transaction</th>
-                <th className="px-4 py-3 text-left">Created</th>
-                <th className="px-4 py-3 text-left">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {paymentsData.payments.map((payment: TPayment) => (
-                <tr
-                  key={payment.paymentId}
-                  className="hover:bg-neutral-800 border-b border-neutral-700 transition-colors"
-                >
-                  <td className="px-4 py-2 border-r border-neutral-800">Ksh {payment.amount}</td>
-                  <td className="px-4 py-2 border-r border-neutral-800 capitalize">{payment.paymentMethod}</td>
-                  <td className="px-4 py-2 border-r border-neutral-800">
-                    <span
-                      className={`px-3 py-1 rounded-full text-xs font-medium tracking-wide ${
-                        payment.paymentStatus === "completed"
-                          ? "bg-green-600 text-white"
-                          : payment.paymentStatus === "pending"
-                          ? "bg-yellow-500 text-black"
-                          : "bg-red-600 text-white"
-                      }`}
-                    >
-                      {payment.paymentStatus}
-                    </span>
-                  </td>
-                  <td className="px-4 py-2 border-r border-neutral-800">User #{payment.userId}</td>
-                  <td className="px-4 py-2 border-r border-neutral-800">Booking #{payment.bookingId}</td>
-                  <td className="px-4 py-2 border-r border-neutral-800">{payment.transactionId}</td>
-                  <td className="px-4 py-2 border-r border-neutral-800">
-                    {new Date(payment.createdAt).toLocaleDateString()}
-                  </td>
-                  <td className="px-4 py-2 flex space-x-2">
-                    <button
-                      className="p-2 rounded bg-neutral-200 text-black border border-neutral-400 hover:bg-white hover:scale-105 transition-transform"
-                      onClick={() => handleEdit(payment)}
-                    >
-                      <FaEdit size={16} />
-                    </button>
-                    <button
-                      className="p-2 rounded bg-red-700 text-white border border-red-500 hover:bg-red-600 hover:scale-105 transition-transform"
-                      onClick={() => handleDelete(payment)}
-                    >
-                      <MdDeleteForever size={16} />
-                    </button>
-                  </td>
+        <div className="overflow-x-auto">
+          <div className="min-w-[900px] max-h-[500px] overflow-y-auto border border-neutral-700 rounded-xl bg-neutral-900 shadow-sm">
+            <table className="table-auto w-full text-sm lg:text-base text-white">
+              <thead className="sticky top-0 bg-neutral-800 z-10">
+                <tr className="text-neutral-300 uppercase text-xs tracking-wider border-b border-neutral-700">
+                  <th className="px-4 py-3 text-left">Amount</th>
+                  <th className="px-4 py-3 text-left">Method</th>
+                  <th className="px-4 py-3 text-left">Status</th>
+                  <th className="px-4 py-3 text-left">User</th>
+                  <th className="px-4 py-3 text-left">Booking</th>
+                  <th className="px-4 py-3 text-left">Transaction</th>
+                  <th className="px-4 py-3 text-left">Created</th>
+                  <th className="px-4 py-3 text-left">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {paymentsData.payments.map((payment: TPayment) => (
+                  <tr
+                    key={payment.paymentId}
+                    className="hover:bg-neutral-800 border-b border-neutral-700 transition-colors"
+                  >
+                    <td className="px-4 py-2 border-r border-neutral-800">Ksh {payment.amount}</td>
+                    <td className="px-4 py-2 border-r border-neutral-800 capitalize">{payment.paymentMethod}</td>
+                    <td className="px-4 py-2 border-r border-neutral-800">
+                      <span
+                        className={`px-3 py-1 rounded-full text-xs font-medium tracking-wide ${
+                          payment.paymentStatus === "completed"
+                            ? "bg-green-600 text-white"
+                            : payment.paymentStatus === "pending"
+                            ? "bg-yellow-500 text-black"
+                            : "bg-red-600 text-white"
+                        }`}
+                      >
+                        {payment.paymentStatus}
+                      </span>
+                    </td>
+                    <td className="px-4 py-2 border-r border-neutral-800">User #{payment.userId}</td>
+                    <td className="px-4 py-2 border-r border-neutral-800">Booking #{payment.bookingId}</td>
+                    <td className="px-4 py-2 border-r border-neutral-800">{payment.transactionId}</td>
+                    <td className="px-4 py-2 border-r border-neutral-800">
+                      {new Date(payment.createdAt).toLocaleDateString()}
+                    </td>
+                    <td className="px-4 py-2 flex space-x-2">
+                      <button
+                        className="p-2 rounded bg-neutral-200 text-black border border-neutral-400 hover:bg-white hover:scale-105 transition-transform"
+                        onClick={() => handleEdit(payment)}
+                      >
+                        <FaEdit size={16} />
+                      </button>
+                      <button
+                        className="p-2 rounded bg-red-700 text-white border border-red-500 hover:bg-red-600 hover:scale-105 transition-transform"
+                        onClick={() => handleDelete(payment)}
+                      >
+                        <MdDeleteForever size={16} />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       ) : (
         <p className="italic text-neutral-400 text-center tracking-wide">No payments found.</p>

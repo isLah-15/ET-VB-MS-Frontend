@@ -2,7 +2,7 @@ import { useState } from "react";
 import Navbar from "../../../Components/Nav/Navbar";
 import { IoCloseSharp } from "react-icons/io5";
 import { FaBars } from "react-icons/fa";
-import AdminDrawer from "./Aside/AdminDrawer";
+import AdminDrawer from "./AdminAside/AdminDrawer";
 import { Outlet } from "react-router";
 import Footer from "../../../Components/Footer/FooterSection";
 

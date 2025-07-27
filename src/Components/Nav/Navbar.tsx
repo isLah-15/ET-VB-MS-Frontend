@@ -2,16 +2,24 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from "../../Features/Auth/UserSlice";
 import type { RootState } from "../../App/Store";
+
 export default function Navbar() {
-
   const user = useSelector((state: RootState) => state.user.user);
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    const handleLogout = () => {
-        dispatch(logout());
-        navigate('/');
-    };
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/');
+  };
+
+  const handleDashboardNavigation = () => {
+    if (user?.role === 'admin') {
+      navigate('/admin/dashboard');
+    } else {
+      navigate('/user/dashboard');
+    }
+  };
 
   return (
     <div className="navbar bg-base-100 shadow-sm">
@@ -36,7 +44,7 @@ export default function Navbar() {
               <Link to="/home">Homepage</Link>
             </li>
             <li>
-              <Link to="/admin/dashboard">Dashboard</Link>
+              <button onClick={handleDashboardNavigation}>Dashboard</button>
             </li>
             <li>
               <button className="btn btn-link" onClick={handleLogout}>Logout</button>

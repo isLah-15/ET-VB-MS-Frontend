@@ -57,6 +57,12 @@ export const bookingAPI = createApi({
       providesTags: ["Booking"],
     }),
 
+    //Get booking by user ID
+    getBookingByUserId: builder.query<TBooking[], number>({
+      query: (userId) => `/booking/user/${userId}`,
+      providesTags: ["Booking"],
+    }),
+
     // Update booking
     updateBooking: builder.mutation<TBooking, Partial<TBooking> & { bookingId: number }>({
       query: ({ bookingId, ...updates }) => ({
@@ -83,6 +89,7 @@ export const {
   useCreateBookingMutation,
   useGetBookingsQuery,
   useGetBookingByIdQuery,
+  useGetBookingByUserIdQuery,
   useUpdateBookingMutation,
   useDeleteBookingMutation,
 } = bookingAPI;

@@ -10,17 +10,18 @@ type RegisterInputs = {
   firstName: string;
   lastName: string;
   email: string;
-  contactPhone: string;
+  contactPhone: number;
   address: string;
   password: string;
   confirmPassword: string;
+  role: string;
 };
 
 const schema = yup.object({
   firstName: yup.string().max(50).required('First name is required'),
   lastName: yup.string().max(50).required('Last name is required'),
   email: yup.string().email('Invalid email').max(100).required('Email is required'),
-  contactPhone: yup.string().max(50).required('Phone number is required'),
+  contactPhone: yup.number().required('Phone number is required'),
   address: yup.string().max(100).required('Address is required'),
   password: yup.string().min(6).max(255).required('Password is required'),
   confirmPassword: yup.string().oneOf([yup.ref('password')], 'Passwords must match').required('Confirm your password'),
@@ -38,7 +39,18 @@ function RegisterPage() {
 
   const onSubmit: SubmitHandler<RegisterInputs> = async (data) => {
     try {
-      const response = await createUser(data).unwrap();
+
+   const { confirmPassword, ...userData } = data;
+
+    // Add role as 'customer'
+    const finalData = {
+      ...userData,
+      role: 'user',
+    };
+
+    console.log(finalData);
+    const response = await createUser(finalData).unwrap();
+    
       console.log("response here...", response);
       toast.success('🎉 Registration successful! Check your email for verification.');
       setTimeout(() => {

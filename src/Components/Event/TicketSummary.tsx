@@ -1,7 +1,7 @@
 // src/pages/TicketSummary.tsx
 import React from "react";
 import Barcode from "react-barcode";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import type { EventType } from "../../Types/EventTypes";
 import type { TBooking } from "../../Features/Booking/BookingAPI";
 import type { TPayment } from "../../Features/Payment/PaymentAPI";
@@ -48,15 +48,15 @@ const TicketSummary: React.FC = () => {
       {/* Collage Background */}
       <div className="absolute top-0 left-0 w-full h-full opacity-60 pointer-events-none z-0">
         <div className="grid grid-cols-3 gap-2 p-4">
-          <img src="src\Assets\Images\download (42).jpg" alt="Collage 1" className="w-full h-40 object-cover rotate-3 grayscale" />
-          <img src="src\Assets\Images\Circus at night.jpg" alt="Collage 2" className="w-full h-40 object-cover -rotate-2 sepia" />
-          <img src="src\Assets\Images\download (43).jpg" alt="Collage 3" className="w-full h-40 object-cover rotate-1 contrast-150" />
-          <img src="src\Assets\Images\download (44).jpg" alt="Collage 4" className="w-full h-40 object-cover rotate-6 brightness-90" />
-          <img src="src\Assets\Images\download (45).jpg" alt="Collage 5" className="w-full h-40 object-cover -rotate-3" />
-          <img src="src\Assets\Images\download (46).jpg" alt="Collage 6" className="w-full h-40 object-cover rotate-2 opacity-80" />
-          <img src="src\Assets\Images\download (47).jpg" alt="Collage 7" className="w-full h-40 object-cover rotate-2 opacity-80" />
-          <img src="src\Assets\Images\download (48).jpg" alt="Collage 8" className="w-full h-40 object-cover rotate-2 opacity-80" />
-          <img src="src\Assets\Images\download (45).jpg" alt="Collage 9" className="w-full h-40 object-cover rotate-2 opacity-80" />
+          <img src="src\\Assets\\Images\\download (42).jpg" alt="Collage 1" className="w-full h-40 object-cover rotate-3 grayscale" />
+          <img src="src\\Assets\\Images\\Circus at night.jpg" alt="Collage 2" className="w-full h-40 object-cover -rotate-2 sepia" />
+          <img src="src\\Assets\\Images\\download (43).jpg" alt="Collage 3" className="w-full h-40 object-cover rotate-1 contrast-150" />
+          <img src="src\\Assets\\Images\\download (44).jpg" alt="Collage 4" className="w-full h-40 object-cover rotate-6 brightness-90" />
+          <img src="src\\Assets\\Images\\download (45).jpg" alt="Collage 5" className="w-full h-40 object-cover -rotate-3" />
+          <img src="src\\Assets\\Images\\download (46).jpg" alt="Collage 6" className="w-full h-40 object-cover rotate-2 opacity-80" />
+          <img src="src\\Assets\\Images\\download (47).jpg" alt="Collage 7" className="w-full h-40 object-cover rotate-2 opacity-80" />
+          <img src="src\\Assets\\Images\\download (48).jpg" alt="Collage 8" className="w-full h-40 object-cover rotate-2 opacity-80" />
+          <img src="src\\Assets\\Images\\download (45).jpg" alt="Collage 9" className="w-full h-40 object-cover rotate-2 opacity-80" />
         </div>
       </div>
 
@@ -97,6 +97,16 @@ const TicketSummary: React.FC = () => {
             <p className="mt-2 text-sm text-gray-400 italic">Scan this to enter the madness...</p>
           </div>
         </div>
+      </div>
+
+      {/* Back to Home Button */}
+      <div className="relative z-10 mt-10 flex justify-center">
+        <Link
+          to="/home"
+          className="bg-rose-700 hover:bg-rose-800 text-white font-semibold py-2 px-6 rounded-xl shadow-lg transition"
+        >
+          Back to Home
+        </Link>
       </div>
     </div>
   );

@@ -22,6 +22,9 @@ import { useSelector } from "react-redux";
 import type { RootState } from "./App/Store";
 import Events from "./Layout/DashboardLayout/Admin/Events/Event";
 import Payments from "./Layout/DashboardLayout/Admin/Payments/Payment";
+import UserDashboard from "./Layout/DashboardLayout/User/UserDashboard";
+import UserProfile from "./Layout/DashboardLayout/User/UserProfile";
+import EventHistory from "./Layout/DashboardLayout/User/EventHistory";
 
 
 // Example: Replace this with your actual user authentication logic
@@ -44,6 +47,7 @@ export default function App() {
         <Route path="/checkout/:eventId" element={<CheckoutPage />} />
         <Route path="/confirmation/:bookingId" element={<BookingConfirmation />} />
         <Route path="/my-tickets" element={<TicketSummary />} />
+        //Admin Routes
         <Route
         path="/admin/dashboard"
         element={
@@ -55,6 +59,18 @@ export default function App() {
         <Route path="profile" element={<Profile />} />
         <Route path="events" element={<Events />} />
         <Route path="payments" element={<Payments />} />
+      </Route>
+
+      //User Routes
+      <Route
+        path="/user/dashboard"
+        element={
+          user.user?.role === 'user' ? <UserDashboard /> : <Navigate to="/login" />
+        }
+      >
+        <Route path="useranalytics" element={<h1>Analytics</h1>} />
+        <Route path="userprofile" element={<UserProfile />} />
+        <Route path="userevents" element={<EventHistory />} />
       </Route>
         
         <Route path="*" element={<Error />} />
