@@ -10,6 +10,7 @@ import { bookingAPI } from '../Features/Booking/BookingAPI'
 import { paymentAPI } from '../Features/Payment/PaymentAPI'
 import { customerSupportAPI } from '../Features/Support/SupportAPI'
 import { venueAPI } from '../Features/Venue/VenueAPI'
+import { analyticsAPI } from '../Features/Analytics/AnalyticsAPI'
 
 
 
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({ //combining all reducers into one root red
     [paymentAPI.reducerPath]: paymentAPI.reducer,
     [customerSupportAPI.reducerPath]: customerSupportAPI.reducer,
     [venueAPI.reducerPath]: venueAPI.reducer,
+    [analyticsAPI.reducerPath]: analyticsAPI.reducer,
     user: UserSlice
 })
 
@@ -50,7 +52,8 @@ export const store = configureStore({
         .concat(paymentAPI.middleware)
         .concat(customerSupportAPI.middleware)
         .concat(venueAPI.middleware)
-        // .concat(carApi.middleware) // add the CarAPI middleware
+        .concat(analyticsAPI.middleware) 
+        
 
 })
 

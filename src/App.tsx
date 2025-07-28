@@ -25,6 +25,7 @@ import Payments from "./Layout/DashboardLayout/Admin/Payments/Payment";
 import UserDashboard from "./Layout/DashboardLayout/User/UserDashboard";
 import UserProfile from "./Layout/DashboardLayout/User/UserProfile";
 import EventHistory from "./Layout/DashboardLayout/User/EventHistory";
+import Analytics from "./Layout/DashboardLayout/Analytics";
 
 
 // Example: Replace this with your actual user authentication logic
@@ -54,7 +55,7 @@ export default function App() {
           user.user?.role === 'admin' ? <AdminDashboard /> : <Navigate to="/login" />
         }
       >
-        <Route path="analytics" element={<h1>Analytics</h1>} />
+        <Route path="analytics" element={<Analytics />} />
         <Route path="users" element={<Users />} />
         <Route path="profile" element={<Profile />} />
         <Route path="events" element={<Events />} />
