@@ -134,7 +134,7 @@ const Analytics = () => {
         
         <StatsCard
           title="Total Bookings"
-          value={totalBookings || 0}
+          value={totalBookings?.totalBookings || 0}
           icon={FaCalendarCheck}
           isLoading={bookingsLoading}
           error={bookingsError}
@@ -144,7 +144,7 @@ const Analytics = () => {
         
         <StatsCard
           title="Total Users"
-          value={totalUsers || 0}
+          value={totalUsers?.totalUsers || 0}
           icon={FaUsers}
           isLoading={usersLoading}
           error={usersError}
@@ -154,7 +154,7 @@ const Analytics = () => {
         
         <StatsCard
           title="Active Events"
-          value={topEvents ? topEvents.length : 0}
+          value={topEvents?.topEvents ? topEvents.length : 0}
           icon={FaTrophy}
           isLoading={eventsLoading}
           error={eventsError}
@@ -180,7 +180,7 @@ const Analytics = () => {
             <ErrorMessage message="Failed to load events data" />
           ) : (
             <div className="space-y-4">
-              {topEvents?.map((event, index) => (
+              {topEvents.topEvents?.map((event, index) => (
                 <div key={event.eventId} className="flex items-center justify-between p-4 bg-zinc-800/40 rounded-lg border border-zinc-700/50 hover:border-yellow-600/30 transition-colors duration-300">
                   <div className="flex items-center gap-3">
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
@@ -220,8 +220,8 @@ const Analytics = () => {
             <ErrorMessage message="Failed to load booking stats" />
           ) : (
             <div className="space-y-3">
-              {bookingStats?.map((stat, index) => {
-                const total = bookingStats.reduce((sum, item) => sum + item.count, 0);
+              {bookingStats.bookingStatusDistribution?.map((stat, index) => {
+                const total = bookingStats.bookingStatusDistribution.reduce((sum, item) => sum + item.count, 0);
                 const percentage = total > 0 ? ((stat.count / total) * 100).toFixed(1) : '0';
                 
                 return (
@@ -262,8 +262,8 @@ const Analytics = () => {
             <ErrorMessage message="Failed to load payment stats" />
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {paymentStats?.map((method, index) => {
-                const total = paymentStats.reduce((sum, item) => sum + item.count, 0);
+              {paymentStats.paymentMethodStats?.map((method, index) => {
+                const total = paymentStats.paymentMethodStats.reduce((sum, item) => sum + item.count, 0);
                 const percentage = total > 0 ? ((method.count / total) * 100).toFixed(1) : '0';
                 
                 return (

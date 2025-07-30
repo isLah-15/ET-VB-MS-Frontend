@@ -26,6 +26,7 @@ import UserDashboard from "./Layout/DashboardLayout/User/UserDashboard";
 import UserProfile from "./Layout/DashboardLayout/User/UserProfile";
 import EventHistory from "./Layout/DashboardLayout/User/EventHistory";
 import Analytics from "./Layout/DashboardLayout/Analytics";
+import Booking from "./Layout/DashboardLayout/Admin/Booking/Booking";
 
 
 // Example: Replace this with your actual user authentication logic
@@ -48,7 +49,8 @@ export default function App() {
         <Route path="/checkout/:eventId" element={<CheckoutPage />} />
         <Route path="/confirmation/:bookingId" element={<BookingConfirmation />} />
         <Route path="/my-tickets" element={<TicketSummary />} />
-        //Admin Routes
+
+        {/* Admin Routes */}
         <Route
         path="/admin/dashboard"
         element={
@@ -60,9 +62,10 @@ export default function App() {
         <Route path="profile" element={<Profile />} />
         <Route path="events" element={<Events />} />
         <Route path="payments" element={<Payments />} />
+        <Route path="bookings" element={<Booking />} />
       </Route>
 
-      //User Routes
+      {/* User Routes */}
       <Route
         path="/user/dashboard"
         element={

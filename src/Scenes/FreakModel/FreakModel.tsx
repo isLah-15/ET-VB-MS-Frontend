@@ -71,7 +71,10 @@ export default function FreakModel() {
         <directionalLight position={[2, 2, 5]} intensity={1.2} castShadow />
         <FreakModelGLTF />
         <ContactShadows position={[0, -1, 0]} opacity={0.4} blur={2} />
-        <Environment preset="sunset" />
+        <Environment
+    files="https://cdn.jsdelivr.net/gh/pmndrs/drei-assets@latest/hdri/venice_sunset_1k.hdr"
+    background
+  />
         <OrbitControls enableZoom={true} enablePan={false} />
       </Canvas>
     </div>

@@ -47,7 +47,7 @@ export const bookingAPI = createApi({
 
     // Get all bookings
     getBookings: builder.query<TBooking[], void>({
-      query: () => "/booking",
+      query: () => "/bookings",
       providesTags: ["Booking"],
     }),
 
@@ -61,6 +61,15 @@ export const bookingAPI = createApi({
     getBookingByUserId: builder.query<TBooking[], number>({
       query: (userId) => `/booking/user/${userId}`,
       providesTags: ["Booking"],
+    }),
+
+    //Confirm booking by ID
+    confirmBooking: builder.mutation<TBooking, number>({
+      query: (bookingId) => ({
+        url: `/booking/${bookingId}/confirm`,
+        method: "PUT",
+      }),
+      invalidatesTags: ["Booking"],
     }),
 
     // Update booking
@@ -89,6 +98,7 @@ export const {
   useCreateBookingMutation,
   useGetBookingsQuery,
   useGetBookingByIdQuery,
+  useConfirmBookingMutation,
   useGetBookingByUserIdQuery,
   useUpdateBookingMutation,
   useDeleteBookingMutation,

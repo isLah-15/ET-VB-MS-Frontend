@@ -58,7 +58,7 @@ export default function Navbar() {
 
       <div className="navbar-center">
         <Link to="/" className="btn btn-ghost text-xl">
-          🎟️ EventMaster
+           EventMaster
         </Link>
       </div>
 

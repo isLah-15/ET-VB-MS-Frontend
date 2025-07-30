@@ -3,6 +3,7 @@ import { FiUsers } from "react-icons/fi";
 import { FaUserCheck } from "react-icons/fa6";
 import { SlCalender } from "react-icons/sl";
 import { FaCashRegister } from "react-icons/fa";
+import { GiPostStamp } from "react-icons/gi";
 
 export type DrawerData = {
     id: string;
@@ -43,6 +44,12 @@ export const adminDrawerData: DrawerData[] = [
         name: "Payments",
         icon: FaCashRegister,
         link: "payments"
+    },
+    {
+        id: "bookings",
+        name: "Bookings",
+        icon: GiPostStamp,
+        link: "bookings"
     }
 
 

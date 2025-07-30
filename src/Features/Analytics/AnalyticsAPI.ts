@@ -30,7 +30,7 @@ export const analyticsAPI = createApi({
       { method: string; count: number }[],
       void
     >({
-      query: () => '/analytics/payments-methods',
+      query: () => '/analytics/payment-methods',
     }),
   }),
 });
