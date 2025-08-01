@@ -76,7 +76,6 @@ const LoginPage = () => {
               className="w-full px-4 py-2 border border-red-200 rounded-md focus:outline-none focus:ring-2 focus:ring-red-400"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
             />
           </div>
 
@@ -90,7 +89,6 @@ const LoginPage = () => {
               className="w-full px-4 py-2 border border-red-200 rounded-md focus:outline-none focus:ring-2 focus:ring-red-400"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
             />
           </div>
 

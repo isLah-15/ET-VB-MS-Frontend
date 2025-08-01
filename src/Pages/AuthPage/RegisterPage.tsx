@@ -14,7 +14,6 @@ type RegisterInputs = {
   address: string;
   password: string;
   confirmPassword: string;
-  role: string;
 };
 
 const schema = yup.object({
@@ -68,7 +67,7 @@ function RegisterPage() {
         <h1 className="text-4xl text-center font-extrabold mb-8 text-red-700 drop-shadow-xl uppercase tracking-wider">
           🎪 Join The Funfair
         </h1>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+        <form onSubmit={handleSubmit(onSubmit as SubmitHandler<any>)} className="space-y-5">
           <div>
             <input
               {...register('firstName')}
@@ -93,6 +92,7 @@ function RegisterPage() {
               {...register('email')}
               placeholder="Email"
               className="w-full circus-input"
+              data-cy="register-email"
             />
             {errors.email && <p className="text-red-600 text-sm">{errors.email.message}</p>}
           </div>

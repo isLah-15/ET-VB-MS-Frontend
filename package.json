@@ -46,6 +46,7 @@
     "@types/redux-persist": "^4.3.1",
     "@types/three": "^0.178.1",
     "@vitejs/plugin-react": "^4.6.0",
+    "cypress": "^14.5.3",
     "daisyui": "^5.0.46",
     "eslint": "^9.30.1",
     "eslint-plugin-react-hooks": "^5.2.0",

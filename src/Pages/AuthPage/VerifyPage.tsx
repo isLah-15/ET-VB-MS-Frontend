@@ -5,112 +5,97 @@ import { useLocation, useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { userAPI } from '../../Features/Auth/UserAPI';
 
-
-
 type VerifyInputs = {
-    email: string;
-    code: string;
+  email: string;
+  code: string;
 };
 
 const schema = yup.object({
-    email: yup.string().email('Invalid email').required('Email is required'),
-    code: yup
-        .string()
-        .matches(/^\d{6}$/, 'Code must be a 6 digit number')
-        .required('Verification code is required'),
+  email: yup.string().email('Invalid email').required('Email is required'),
+  code: yup
+    .string()
+    .matches(/^\d{6}$/, 'Code must be a 6 digit number')
+    .required('Verification code is required'),
 });
 
 const VerifyUser = () => {
-    const navigate = useNavigate()
-    const location = useLocation();
-    const emailFromState = location.state?.email || '';
+  const navigate = useNavigate();
+  const location = useLocation();
+  const emailFromState = location.state?.email || '';
 
-    const [verifyUser, { isLoading }] = userAPI.useVerifyUserMutation();
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<VerifyInputs>({
-        resolver: yupResolver(schema),
-        defaultValues: {
-            email: emailFromState,
-        },
-    });
+  const [verifyUser, { isLoading }] = userAPI.useVerifyUserMutation();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<VerifyInputs>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      email: emailFromState,
+    },
+  });
 
-    const onSubmit: SubmitHandler<VerifyInputs> = async (data) => {
-        try {
-            const response = await verifyUser(data).unwrap();
-            console.log("Verification response:", response);
+  const onSubmit: SubmitHandler<VerifyInputs> = async (data) => {
+    try {
+      const response = await verifyUser(data).unwrap();
+      console.log('Verification response:', response);
 
-            toast.success("Account verified successfully!");
-            // Redirect or show success
-            setTimeout(() => {
-                navigate('/login', {
-                    state: { email: data.email }
-                });
-            }, 2000);
-        } catch (error) {
-            console.error("Verification error:", error);
-            toast.error(`Verification failed. Please check your code and try again`);
-            // Error handling
-        }
-    };
+      toast.success('Account verified successfully!');
+      setTimeout(() => {
+        navigate('/login', {
+          state: { email: data.email },
+        });
+      }, 2000);
+    } catch (error) {
+      console.error('Verification error:', error);
+      toast.error('Verification failed. Please check your code and try again');
+    }
+  };
 
-    return (
-  <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-red-950 via-yellow-900 to-amber-800 font-circus">
-    <div className="w-full max-w-md p-10 md:p-12 rounded-3xl shadow-2xl border-4 border-dashed border-yellow-500 bg-zinc-950/90 text-yellow-100 backdrop-blur-xl transition-transform duration-300 hover:scale-[1.01]">
-      <h1 className="text-4xl md:text-5xl font-black mb-10 text-center text-amber-300 tracking-widest uppercase drop-shadow-[0_0_10px_#fbbf24]">
-         Verify Your Account 🎪
-      </h1>
+  return (
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-yellow-50 via-rose-100 to-red-200 font-circus">
+      <div className="w-full max-w-lg bg-white/90 border-4 border-red-500 rounded-xl shadow-2xl px-8 py-10 text-red-900">
+        <h1 className="text-4xl text-center font-extrabold mb-8 text-red-700 drop-shadow-xl uppercase tracking-wider">
+          🎟️ Verify Your Account
+        </h1>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+          <div>
+            <input
+              type="email"
+              {...register('email')}
+              placeholder="Enter your Email"
+              className="w-full circus-input"
+              readOnly={!!emailFromState}
+            />
+            {errors.email && (
+              <p className="text-red-600 text-sm">{errors.email.message}</p>
+            )}
+          </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-        <div>
-          <input
-            type="email"
-            {...register('email')}
-            placeholder="Enter your Email"
-            className="w-full px-5 py-4 bg-zinc-900 text-yellow-100 border-2 border-yellow-500 rounded-xl shadow-inner focus:ring-4 focus:ring-amber-400 placeholder:text-yellow-400 placeholder:italic"
-            readOnly={!!emailFromState}
-          />
-          {errors.email && (
-            <span className="text-sm text-red-400 mt-1 block">{errors.email.message}</span>
-          )}
-        </div>
+          <div>
+            <input
+              type="text"
+              {...register('code')}
+              placeholder="Enter 6 Digit Code"
+              maxLength={6}
+              className="w-full circus-input"
+            />
+            {errors.code && (
+              <p className="text-red-600 text-sm">{errors.code.message}</p>
+            )}
+          </div>
 
-        <div>
-          <input
-            type="text"
-            {...register('code')}
-            placeholder="Enter the 6 Digit Code"
-            maxLength={6}
-            className="w-full px-5 py-4 bg-zinc-900 text-yellow-100 border-2 border-yellow-500 rounded-xl shadow-inner focus:ring-4 focus:ring-amber-400 placeholder:text-yellow-400 placeholder:italic"
-          />
-          {errors.code && (
-            <span className="text-sm text-red-400 mt-1 block">{errors.code.message}</span>
-          )}
-        </div>
-
-        
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="w-full py-4 px-6 mt-6 rounded-full bg-gradient-to-r from-red-700 to-yellow-600 hover:from-yellow-600 hover:to-red-700 text-white font-extrabold uppercase tracking-widest border-2 border-amber-900 shadow-lg hover:shadow-yellow-500/70 transition-all duration-300"
-        >
-          {isLoading ? (
-            <>
-              <span className="loading loading-spinner text-yellow-300 mr-2" />
-              Verifying...
-            </>
-          ) : (
-            "🎟️ Verify"
-          )}
-        </button> 
-       
-      </form>
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-full shadow-lg tracking-wider uppercase transition duration-300 ease-in-out"
+          >
+            {isLoading ? 'Verifying...' : 'Verify 🎟️'}
+          </button>
+        </form>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
-
-}
 export default VerifyUser;
